@@ -4,8 +4,7 @@ import { FileText } from "lucide-react";
 import { pdfs } from "@/app/data/pdfs";
 import Card from "@/app/components/Card";
 
-export default function PDFsPage() {
-  // Icon for all PDFs
+export default function ResourcesPage() {
   const icon = <FileText className="w-10 h-10 text-white" />;
 
   return (
