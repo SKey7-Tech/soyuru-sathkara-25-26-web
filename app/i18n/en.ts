@@ -41,6 +41,26 @@ export const en = {
       description: "We're looking for schools that share our vision of providing quality education to all students. Partner with Soyuru Sathkara to bring comprehensive learning resources, video lessons, and study materials to your students.",
       button: "Register Your School"
   },
+  pdfs: {
+    tag: "Downloadable Resources",
+    title: "Access Our Documents",
+    subtitle: "Download important documents and study materials",
+    button: "Download",
+    items: {
+      "handbook-2025": {
+        title: "Student Handbook 2025",
+        description: "Complete guide for students with policies and procedures"
+      },
+      "annual-report": {
+        title: "Annual Report 2024",
+        description: "School's annual performance and achievement report"
+      },
+      "prospectus": {
+        title: "School Prospectus",
+        description: "Overview of programs, facilities, and admission details"
+      }
+    }
+  },
   footer: {
     brand: {
       name: "Soyuru Sathkara",
