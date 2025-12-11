@@ -37,7 +37,7 @@ export function QuickLinks() {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-blue-50/30">
+    <section className="py-24 bg-[#acb8c3] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
