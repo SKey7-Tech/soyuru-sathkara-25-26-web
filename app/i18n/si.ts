@@ -46,6 +46,12 @@ export const si = {
     title: "අපගේ ලේඛන වෙත ප්‍රවේශ වන්න",
     subtitle: "වැදගත් ලේඛන සහ අධ්‍යයන ද්‍රව්‍ය බාගන්න",
     button: "බාගන්න",
+    videosHeading: "සම්බන්ධිත වීඩියෝ පාඩම්",
+    videosLabel : {
+      "discussion_1": "සාකච්ඡාව 01",
+      "discussion_2": "සාකච්ඡාව 02",
+      "discussion_3": "සාකච්ඡාව 03"
+    },
     items: {
       "handbook-2025": {
         title: "සිසුන්ගේ ගිණුම් පොත 2025",

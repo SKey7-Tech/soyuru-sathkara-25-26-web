@@ -1,9 +1,9 @@
 "use client";
 
-import React, { ReactNode } from "react";
+import React, { ReactNode,useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Download, FileText } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Download, FileText,Video } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
 
@@ -16,6 +16,7 @@ type CardProps = {
   href?: string;
   downloadUrl?: string;
   downloadFileName?: string;
+  videos?: {label: string; url: string}[];
   onClick?: () => void;
   className?: string;
 };
@@ -29,11 +30,15 @@ export default function Card({
   href,
   downloadUrl,
   downloadFileName,
+  videos,
   onClick,
   className = "",
 }: CardProps) {
   const { language } = useLanguage();
   const t = translations[language].pdfs as any;
+
+  // State to manage video modal visibility
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Resolve title: use titleKey first, then fallback to title prop
   const resolvedTitle = titleKey && t?.items?.[titleKey]?.title ? t.items[titleKey].title : title;
@@ -82,12 +87,21 @@ export default function Card({
     }
   };
 
+  const onCardClick = (e: React.MouseEvent) => {
+    if(onClick) onClick();
+    if (videos && videos.length > 0) {
+      setIsExpanded(!isExpanded);
+    }
+  };
+
   const cardContent = (
     <motion.div
-      whileHover={{ y: -12, scale: 1.02 }}
+      layout
+      onClick={onCardClick}
+      whileHover={{ y: -12, scale:1.02 }}
       whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="group relative bg-linear-to-br from-white to-blue-50/50 rounded-3xl p-8 border-2 border-blue-200 hover:border-[#3b82f6] shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden h-full"
+      className="group relative bg-linear-to-br from-white to-blue-50/50 rounded-3xl p-8 border-2 border-blue-200 hover:border-[#3b82f6] shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden "
     >
       {/* Animated background gradient */}
       <motion.div
@@ -134,6 +148,46 @@ export default function Card({
             {t.button}
           </motion.button>
         )}
+
+        {/* Video Modal */}
+        <AnimatePresence>
+          {isExpanded && videos && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="overflow-hidden"
+            >
+              <div className="pt-2 space-y-2 border-t border-gray-100 mt-2">
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                    {t.videosHeading || "Related Video Lessons"}
+                  </p>
+                  {videos.map((video, index) => (
+                    <Link
+                      key={index}
+                      href={video.url}
+                      target="_blank"
+                      onClick={(e) => e.stopPropagation()}
+                      className="block"
+                    >
+                      <motion.div
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="flex items-center gap-3 p-3 rounded-lg bg-gray-700 text-gray-100 border border-gray-800 hover:bg-black hover:border-gray-600 transition-all"
+                    >
+                      {/* Red Icon to pop against dark background */}
+                      <div className="p-1.5 bg-blue-600 rounded-md">
+                        <Video className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="font-medium text-sm truncate">{t.videosLabel[video.label] || video.label}</span>
+                    </motion.div>
+                    </Link>
+                  ))}
+                </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Corner accent */}

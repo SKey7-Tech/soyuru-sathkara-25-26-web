@@ -22,6 +22,7 @@ export default function ResourcesPage() {
               icon={icon}
               downloadUrl={pdf.filePath}
               downloadFileName={`${pdf.id}.pdf`}
+              videos={pdf.videos}
               className="h-full"
             />
           ))}

@@ -1,3 +1,5 @@
+import { video } from "framer-motion/client";
+
 export const en = {
   hero: {
     badge: "Empowering Education for All",
@@ -46,6 +48,12 @@ export const en = {
     title: "Access Our Documents",
     subtitle: "Download important documents and study materials",
     button: "Download",
+    videosHeading: "Related Video Lessons",
+    videosLabel : {
+      "discussion_1": "Discussion Part 1",
+      "discussion_2": "Discussion Part 2",
+      "discussion_3": "Discussion Part 3"
+    },
     items: {
       "handbook-2025": {
         title: "Student Handbook 2025",
