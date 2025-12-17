@@ -13,7 +13,7 @@ export function IntroVideo() {
 
 
   return (
-    <section className="py-24 bg-gradient-to-b from-[#d4d4dc]/20 to-white">
+    <section className="py-24 bg-gradient-to-b from-white to-blue-50/30">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

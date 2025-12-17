@@ -12,11 +12,11 @@ export function SchoolsOutreach() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const backgroundImages = [
-    "https://scontent.fcmb2-2.fna.fbcdn.net/v/t39.30808-6/476836393_1139484798215750_1112829780596392764_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=f727a1&_nc_eui2=AeEPjGBYKKS116U2TLKq7y6zvQ4iCyhUQmS9DiILKFRCZD1UyJjEAueyEL0dmzxIw9P_vsgZxE86IzZUeHVTzuf6&_nc_ohc=E7z8Jx8A5qMQ7kNvwEm9YOo&_nc_oc=Adnp2PTXuFn1c01pnVA2BbCvW5ZEQi5v0srFkkpn8obFrd94krNhzTema3tmFUtre8M&_nc_zt=23&_nc_ht=scontent.fcmb2-2.fna&_nc_gid=VNhJPyaWYwnd3xTjiMFaDw&oh=00_AfnhjgICWOpSSgCj6s4mscF0foZEWPY7fwGLcZu8VWQt7A&oe=69401F2E",
-    "https://scontent.fcmb2-2.fna.fbcdn.net/v/t39.30808-6/477439081_1139484788215751_2716449978005112982_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=f727a1&_nc_eui2=AeFuiv_oDP6oMRcdbU2UlGqF5EmhCVdY_CfkSaEJV1j8J3TYkCR7mOGGa5eD0J1U99jTVc7Bmy-5g_3p85O22Rke&_nc_ohc=Mp-PdFlh1EcQ7kNvwEXONvm&_nc_oc=AdllfOf0rLxsPkQucD4rxylcsIjLsd39oCwZiO2wuhgayB1plqXyE2TQFnPfMzVRSuY&_nc_zt=23&_nc_ht=scontent.fcmb2-2.fna&_nc_gid=gFDKOjRY73as3YNwM_e0NQ&oh=00_Afnt6baIA7A9Uhmtlrbe-ezONm--ecBugbg0if-e0_et-g&oe=6940255B",
-    "https://scontent.fcmb2-2.fna.fbcdn.net/v/t39.30808-6/484511193_1171510201679876_5419784680363484887_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGDyFE_5zYJ9d-l_l-_4RMd1cc8oFFYTubVxzygUVhO5syw-R2W34aDPAqPX2QfPjaW5oiIWelzJgmxbSwcvwIY&_nc_ohc=67DdC7ekd9AQ7kNvwEULfjF&_nc_oc=AdmqzyvuFyCjcPPIZ5DN6loQgoJzktMWe7i-IAFM37pu59IYaHrkp6YXCkiVvyDXVUY&_nc_zt=23&_nc_ht=scontent.fcmb2-2.fna&_nc_gid=_0IsErpbM2Iie9gVx2fQgA&oh=00_AfmzRFlHfapKrpaL99pxD8gPTXEO-OgQ0ZLkN09-SvUW-g&oe=693FEFAC",
-    "https://scontent.fcmb2-2.fna.fbcdn.net/v/t39.30808-6/485370289_1171520125012217_6537229849069334208_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEOm4dIWuavRAvdlCge1ZSwQOHQov2fwftA4dCi_Z_B-1gYvmj69Cc5l-jzWeKRmoF5HST547N9hQJ9Av8ofgrv&_nc_ohc=JknZ7jEYLzQQ7kNvwFaSx3n&_nc_oc=Adkzq4rotJN0o4Yf7QmKOTgTciladw-9gtCZ_o_8zg_t3nDD_hggMMVinqCitIaV-Mo&_nc_zt=23&_nc_ht=scontent.fcmb2-2.fna&_nc_gid=BiPKumrknFP64WMwIHgiwA&oh=00_Afk-3DB99onJbfrove7uTGChfWOUDBjp_mlUlYIQGIP2rQ&oe=69402667",
-    "https://scontent.fcmb2-2.fna.fbcdn.net/v/t39.30808-6/485161605_1171699988327564_6316482697652813926_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeE-MxBVvrMzI_uwg5ATdc_IWvlf6696yC5a-V_rr3rILtmTsntCG6ox2CQOdci_STqhoncv5PEiu63rKI4I8xOH&_nc_ohc=UeGfvZ3k98cQ7kNvwFpvjHH&_nc_oc=Admb5ZfgX7qnuFC5dDmwgLqNZ6_usAujx0XWM5TCGQpDM-218gfRqrVBtsWl5Z_cZAQ&_nc_zt=23&_nc_ht=scontent.fcmb2-2.fna&_nc_gid=etHEncdmE9iAL9SG2SxdvQ&oh=00_AfnGkTes-FCkHbhZWQtrn_k63VZuHbeJChe55rexpEATpw&oe=69401FE3"
+    "/schoolOutreach/so1.jpg",
+    "/schoolOutreach/so2.jpg",
+    "/schoolOutreach/so3.jpg",
+    "/schoolOutreach/so4.jpg",
+    "/schoolOutreach/so5.jpg"
   ];
 
   useEffect(() => {
@@ -53,15 +53,21 @@ export function SchoolsOutreach() {
         {backgroundImages.map((image, index) => (
           <motion.div
             key={index}
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${image})` }}
+            className="absolute inset-0"
             initial={{ opacity: 0 }}
             animate={{ 
               opacity: currentImageIndex === index ? 1 : 0,
               scale: currentImageIndex === index ? 1.1 : 1
             }}
             transition={{ duration: 1.5 }}
-          />
+          >
+            <img
+              src={image}
+              alt={`School outreach background ${index + 1}`}
+              loading="lazy"
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
         ))}
         <div className="absolute inset-0 bg-gradient-to-r from-[#1d1e22]/95 via-[#393f4d]/90 to-[#1d1e22]/95"></div>
       </div>

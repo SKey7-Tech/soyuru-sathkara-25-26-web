@@ -40,3 +40,8 @@ npm install lucide-react framer-motion
 
 ## MultiLanguage Translations
 You will hv to add the en, si, ta versions of every text you write into "i18n/ en.ts, si.ts and ta.ts"
+
+## SEO
+Add the rest of the SEO important pages into sitemap, 
+Create and add an OGimage to layout.tsx/metadata,
+Check the domain is correct or not on layout.tsx, robots.txt
