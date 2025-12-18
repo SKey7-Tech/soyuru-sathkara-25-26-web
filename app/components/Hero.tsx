@@ -15,11 +15,12 @@ export function Hero() {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
-          src="https://images.unsplash.com/photo-1654366698665-e6d611a9aaa9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdHVkZW50cyUyMGxlYXJuaW5nJTIwY2xhc3Nyb29tfGVufDF8fHx8MTc2NDY5NzA3OXww&ixlib=rb-4.1.0&q=80&w=1080"
+          src="/hero/ssHero.jpg"
           alt="Students learning in classroom"
-          loading="eager"
           fetchPriority="high"
           className="w-full h-full object-cover"
+          width={1920}
+          height={1080}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-[#1d1e22]/95 via-[#393f4d]/90 to-[#1d1e22]/95"></div>
       </div>

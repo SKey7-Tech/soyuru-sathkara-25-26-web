@@ -65,8 +65,9 @@ export function SchoolsOutreach() {
             <ImageWithFallback
               src={image}
               alt={`School outreach background ${index + 1}`}
-              loading="lazy"
-              className="w-full h-full object-cover"
+              fill
+              sizes="100vw"
+              className="object-cover"
             />
           </motion.div>
         ))}

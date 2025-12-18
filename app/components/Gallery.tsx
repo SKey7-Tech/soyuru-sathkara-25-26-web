@@ -25,7 +25,7 @@ export function Gallery() {
       alt: "School visit"
     },
     {
-      url: "/gallery/ss5.jpg",
+      url: "/gallery/ss8.jpg",
       alt: "soyuru sathkara 2025"
     },
     {

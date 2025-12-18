@@ -8,18 +8,22 @@ import { Footer } from "./components/Footer";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ss.efsu-uom.lk"),
   title: "Soyuru Sathkara - Education Beyond Boundaries",
   description: "Comprehensive learning resources for G.C.E. A/L students",
-  keywords: ["GCE A/L", "Sri Lanka", "education", "learning resources", "papers", "video lectures", "theory notes", "uom", "University of Moratuwa"],
+  keywords: ["GCE O/L", "Sri Lanka", "education", "learning resources", "papers", "video lectures", "theory notes", "uom", "University of Moratuwa"],
   authors: [{ name: "Soyuru Sathkara", url: "https://ss.efsu-uom.lk" }],
   publisher: "Soyuru Sathkara",
   alternates: {
@@ -87,6 +91,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
