@@ -1,9 +1,11 @@
+import { Suspense } from "react";
 import { Hero } from "./components/Hero";
 import { QuickLinks } from "./components/QuickLinks";
 import { Gallery } from "./components/Gallery";
 import { IntroVideo } from "./components/IntroVideo";
-import { SchoolsOutreach } from "./components/SchoolsOutreach";
+// import { SchoolsOutreach } from "./components/SchoolsOutreach";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { QuickLinksSkeleton, GallerySkeleton, IntroVideoSkeleton, SchoolsOutreachSkeleton } from "./components/LoadingSkeletons";
 
 export default function Home() {
   const structuredData = {
@@ -109,25 +111,37 @@ export default function Home() {
         <ErrorBoundary componentName="Hero">
           <Hero />
         </ErrorBoundary>
+        
         <ErrorBoundary componentName="Quick Links">
-          <section id="quick-links" aria-label="Quick Links">
-            <QuickLinks />
-          </section>
+          <Suspense fallback={<QuickLinksSkeleton />}>
+            <section id="quick-links" aria-label="Quick Links">
+              <QuickLinks />
+            </section>
+          </Suspense>
         </ErrorBoundary>
+        
         <ErrorBoundary componentName="Introduction Video">
-          <section id="intro-video" aria-label="Introduction Video">
-            <IntroVideo />
-          </section>
+          <Suspense fallback={<IntroVideoSkeleton />}>
+            <section id="intro-video" aria-label="Introduction Video">
+              <IntroVideo />
+            </section>
+          </Suspense>
         </ErrorBoundary>
+        
         <ErrorBoundary componentName="Gallery">
-          <section id="gallery" aria-label="Photo Gallery">
-            <Gallery />
-          </section>
+          <Suspense fallback={<GallerySkeleton />}>
+            <section id="gallery" aria-label="Photo Gallery">
+              <Gallery />
+            </section>
+          </Suspense>
         </ErrorBoundary>
+        
         {/* <ErrorBoundary componentName="Schools Outreach">
-          <section id="schools-outreach" aria-label="Schools Outreach Program">
-            <SchoolsOutreach />
-          </section>
+          <Suspense fallback={<SchoolsOutreachSkeleton />}>
+            <section id="schools-outreach" aria-label="Schools Outreach Program">
+              <SchoolsOutreach />
+            </section>
+          </Suspense>
         </ErrorBoundary> */}
       </main>
     </>
