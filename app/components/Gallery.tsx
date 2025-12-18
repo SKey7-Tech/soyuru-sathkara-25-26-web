@@ -5,6 +5,7 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
 import Image from "next/image";
+import { containerVariants, itemVariants } from "../utils/animations";
 
 export function Gallery() {
   const { language } = useLanguage();
@@ -13,7 +14,7 @@ export function Gallery() {
   const images = [
     {
       url: "/gallery/ss2.jpg",
-      alt: "Teaching session"
+      alt: "Tute program"
     },
     {
       url: "/gallery/ss3.jpg",
@@ -25,7 +26,7 @@ export function Gallery() {
     },
     {
       url: "/gallery/ss5.jpg",
-      alt: "Students studying"
+      alt: "soyuru sathkara 2025"
     },
     {
       url: "/gallery/ss6.jpg",
@@ -36,27 +37,6 @@ export function Gallery() {
       alt: "Books and education"
     }
   ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
 
   return (
     <section id="gallery" className="py-24 bg-gradient-to-b from-white to-blue-50/30">
@@ -76,7 +56,7 @@ export function Gallery() {
         </motion.div>
 
         <motion.div
-          variants={containerVariants}
+          variants={containerVariants.default}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -85,7 +65,7 @@ export function Gallery() {
           {images.map((image, index) => (
             <motion.div
               key={index}
-              variants={itemVariants}
+              variants={itemVariants.fadeInScale}
               whileHover={{ scale: 1.05, zIndex: 10 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="relative rounded-2xl overflow-hidden shadow-lg aspect-[4/3] group cursor-pointer"

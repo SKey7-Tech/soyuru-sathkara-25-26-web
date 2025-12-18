@@ -45,3 +45,20 @@ You will hv to add the en, si, ta versions of every text you write into "i18n/ e
 Add the rest of the SEO important pages into sitemap, 
 Create and add an OGimage to layout.tsx/metadata,
 Check the domain is correct or not on layout.tsx, robots.txt
+
+##  Work In Progress (TODO)
+
+### Pending Pages
+The following navigation links are placeholders (hash links) pending implementation by other team members:
+
+- **Resources**
+  - [ ] Past Papers (`#papers` → `/resources/papers`)
+  - [ ] Short Notes (`#shortnotes` → `/resources/short-notes`)
+  - [ ] Theory Notes (`#theorynotes` → `/resources/theory-notes`)
+  
+- **Other Pages**
+  - [ ] About Us (`#about` → `/about`)
+  - [ ] Contact (`#contact` → `/contact`)
+
+**Action Required:** Update `app/components/Navbar.tsx` and `app/components/Footer.tsx` 
+when these pages are implemented.

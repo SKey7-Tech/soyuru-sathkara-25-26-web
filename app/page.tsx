@@ -3,6 +3,7 @@ import { QuickLinks } from "./components/QuickLinks";
 import { Gallery } from "./components/Gallery";
 import { IntroVideo } from "./components/IntroVideo";
 import { SchoolsOutreach } from "./components/SchoolsOutreach";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 export default function Home() {
   const structuredData = {
@@ -105,19 +106,29 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <main className="min-h-screen bg-white">
-        <Hero />
-        <section id="quick-links" aria-label="Quick Links">
-          <QuickLinks />
-        </section>
-        <section id="intro-video" aria-label="Introduction Video">
-          <IntroVideo />
-        </section>
-        <section id="gallery" aria-label="Photo Gallery">
-          <Gallery />
-        </section>
-        <section id="schools-outreach" aria-label="Schools Outreach Program">
-          <SchoolsOutreach />
-        </section>
+        <ErrorBoundary componentName="Hero">
+          <Hero />
+        </ErrorBoundary>
+        <ErrorBoundary componentName="Quick Links">
+          <section id="quick-links" aria-label="Quick Links">
+            <QuickLinks />
+          </section>
+        </ErrorBoundary>
+        <ErrorBoundary componentName="Introduction Video">
+          <section id="intro-video" aria-label="Introduction Video">
+            <IntroVideo />
+          </section>
+        </ErrorBoundary>
+        <ErrorBoundary componentName="Gallery">
+          <section id="gallery" aria-label="Photo Gallery">
+            <Gallery />
+          </section>
+        </ErrorBoundary>
+        {/* <ErrorBoundary componentName="Schools Outreach">
+          <section id="schools-outreach" aria-label="Schools Outreach Program">
+            <SchoolsOutreach />
+          </section>
+        </ErrorBoundary> */}
       </main>
     </>
   );

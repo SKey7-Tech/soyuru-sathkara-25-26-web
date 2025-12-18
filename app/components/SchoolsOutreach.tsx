@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export function SchoolsOutreach() {
   const { language } = useLanguage();
@@ -61,7 +62,7 @@ export function SchoolsOutreach() {
             }}
             transition={{ duration: 1.5 }}
           >
-            <img
+            <ImageWithFallback
               src={image}
               alt={`School outreach background ${index + 1}`}
               loading="lazy"

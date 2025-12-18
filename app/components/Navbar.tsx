@@ -156,9 +156,8 @@ export function Navbar() {
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+        initial={{ y: 0, opacity: 1 }}
+        animate={{ y: 0, opacity: 1 }}
         style={{
           backgroundColor: (isHeroSection || isDarkSection)
             ? (isScrolled ? 'rgba(57, 63, 77, 0.95)' : 'rgba(57, 63, 77, 0.9)')

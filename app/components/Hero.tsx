@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export function Hero() {
   const { language } = useLanguage();
@@ -13,7 +14,7 @@ export function Hero() {
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <img
+        <ImageWithFallback
           src="https://images.unsplash.com/photo-1654366698665-e6d611a9aaa9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdHVkZW50cyUyMGxlYXJuaW5nJTIwY2xhc3Nyb29tfGVufDF8fHx8MTc2NDY5NzA3OXww&ixlib=rb-4.1.0&q=80&w=1080"
           alt="Students learning in classroom"
           loading="eager"
