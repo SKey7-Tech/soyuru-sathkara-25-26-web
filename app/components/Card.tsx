@@ -1,9 +1,9 @@
 "use client";
 
-import React, { ReactNode,useState } from "react";
+import React, { ReactNode, useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Download, FileText,Video } from "lucide-react";
+import { Download, FileText, Video, ChevronDown } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
 
@@ -39,6 +39,20 @@ export default function Card({
 
   // State to manage video modal visibility
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+
+  // Detect if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Resolve title: use titleKey first, then fallback to title prop
   const resolvedTitle = titleKey && t?.items?.[titleKey]?.title ? t.items[titleKey].title : title;
@@ -89,8 +103,25 @@ export default function Card({
 
   const onCardClick = (e: React.MouseEvent) => {
     if(onClick) onClick();
-    if (videos && videos.length > 0) {
+    // Only expand on click for mobile
+    if (isMobile && videos && videos.length > 0) {
       setIsExpanded(!isExpanded);
+    }
+  };
+
+  const handleMouseEnter = () => {
+    // Only expand on hover for desktop
+    if (!isMobile && videos && videos.length > 0) {
+      setIsHovering(true);
+      setIsExpanded(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    // Only collapse on hover leave for desktop
+    if (!isMobile) {
+      setIsHovering(false);
+      setIsExpanded(false);
     }
   };
 
@@ -98,6 +129,8 @@ export default function Card({
     <motion.div
       layout
       onClick={onCardClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       whileHover={{ y: -12, scale:1.02 }}
       whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -146,6 +179,29 @@ export default function Card({
           >
             <Download className="w-5 h-5" />
             {t.button}
+          </motion.button>
+        )}
+
+        {/* Mobile "See Videos/Notes" Button */}
+        {isMobile && videos && videos.length > 0 && !isExpanded && (
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsExpanded(true);
+            }}
+            className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 font-medium"
+          >
+            <Video className="w-5 h-5" />
+            <span>See Videos/Notes</span>
+            <motion.div
+              animate={{ y: [0, 3, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <ChevronDown className="w-5 h-5" />
+            </motion.div>
           </motion.button>
         )}
 
