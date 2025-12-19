@@ -72,7 +72,7 @@ export const en = {
   footer: {
     brand: {
       name: "Soyuru Sathkara",
-      description: "Empowering students with quality education resources and comprehensive learning materials for G.C.E. A/L examination."
+      description: "Empowering students with quality education resources and comprehensive learning materials for G.C.E. O/L examination."
     },
     quickLinks: {
       title: "Quick Links",
@@ -84,9 +84,7 @@ export const en = {
       title: "Resources",
       videos: "Video Lessons",
       notes: "Study Notes",
-      shortNotes: "Short Notes",
-      downloads: "Downloads",
-      faqs: "FAQs"
+      shortNotes: "Short Notes"
     },
     contact: {
       title: "Contact Us"

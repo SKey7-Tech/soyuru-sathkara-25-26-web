@@ -33,7 +33,7 @@ export function Footer() {
               {/* <a href="#" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
                 <Instagram className="w-5 h-5" />
               </a> */}
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+              <a href="https://www.youtube.com/@SoyuruSathkaraya" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
                 <Youtube className="w-5 h-5" />
               </a>
             </div>
@@ -58,8 +58,6 @@ export function Footer() {
               <li><a href="#" className="text-white/80 hover:text-white transition-colors">{t.resources.videos}</a></li>
               <li><a href="#" className="text-white/80 hover:text-white transition-colors">{t.resources.notes}</a></li>
               <li><a href="#" className="text-white/80 hover:text-white transition-colors">{t.resources.shortNotes}</a></li>
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">{t.resources.downloads}</a></li>
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">{t.resources.faqs}</a></li>
             </ul>
           </div>
 
@@ -69,11 +67,7 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-[#3b82f6] flex-shrink-0 mt-1" />
-                <span className="text-white/80">contact@soyurusathkara.lk</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-[#3b82f6] flex-shrink-0 mt-1" />
-                <span className="text-white/80">+94 XX XXX XXXX</span>
+                <span className="text-white/80">soyuru-sathkara@efsu-uom.lk</span>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#3b82f6] flex-shrink-0 mt-1" />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, BookOpen, FileText, Image, Mail, Home } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -12,6 +12,7 @@ export function Navbar() {
   const [isHeroSection, setIsHeroSection] = useState(true);
   const [isDarkSection, setIsDarkSection] = useState(false);
   const { language, setLanguage } = useLanguage();
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   const t = translations[language];
 
@@ -66,6 +67,53 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobileMenuOpen]);
 
+  // Focus trap for mobile menu
+  useEffect(() => {
+    if (!isMobileMenuOpen || !mobileMenuRef.current) return;
+
+    const menuElement = mobileMenuRef.current;
+    const focusableElements = menuElement.querySelectorAll(
+      'a[href], button, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstElement = focusableElements[0] as HTMLElement;
+    const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+    // Focus first element when menu opens
+    firstElement?.focus();
+
+    const handleTabKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+
+      if (e.shiftKey) {
+        // Shift + Tab
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement?.focus();
+        }
+      } else {
+        // Tab
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement?.focus();
+        }
+      }
+    };
+
+    const handleEscapeKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    menuElement.addEventListener('keydown', handleTabKey as any);
+    document.addEventListener('keydown', handleEscapeKey);
+
+    return () => {
+      menuElement.removeEventListener('keydown', handleTabKey as any);
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [isMobileMenuOpen]);
+
   const navLinks = [
     { 
       name: language === "en" ? "Home" : language === "si" ? "මුල් පිටුව" : "முகப்பு",
@@ -108,9 +156,8 @@ export function Navbar() {
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+        initial={{ y: 0, opacity: 1 }}
+        animate={{ y: 0, opacity: 1 }}
         style={{
           backgroundColor: (isHeroSection || isDarkSection)
             ? (isScrolled ? 'rgba(57, 63, 77, 0.95)' : 'rgba(57, 63, 77, 0.9)')
@@ -125,7 +172,7 @@ export function Navbar() {
             {/* Logo */}
             <motion.a
               href="#home"
-              className="flex items-center gap-2 md:gap-3 group"
+              className="flex items-center gap-2 md:gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -152,10 +199,10 @@ export function Navbar() {
                 <motion.a
                   key={link.href}
                   href={link.href}
-                  className={`px-4 py-2 rounded-lg transition-all relative group ${
+                  className={`px-4 py-2 rounded-lg transition-all relative group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                     (isHeroSection || isDarkSection)
-                      ? "text-white hover:text-blue-300 hover:bg-white/10" 
-                      : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                      ? "text-white hover:text-blue-300 hover:bg-white/10 focus-visible:bg-white/10" 
+                      : "text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus-visible:bg-blue-50"
                   }`}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -187,7 +234,7 @@ export function Navbar() {
                   <motion.button
                     key={lang.code}
                     onClick={() => setLanguage(lang.code)}
-                    className={`px-2 md:px-3 py-1.5 rounded-md text-sm transition-all ${
+                    className={`px-2 md:px-3 py-1.5 rounded-md text-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                       language === lang.code
                         ? "bg-blue-600 text-white shadow-md"
                         : (isHeroSection || isDarkSection)
@@ -206,7 +253,9 @@ export function Navbar() {
               {/* Mobile Menu Button */}
               <motion.button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`lg:hidden p-2 rounded-lg transition-colors ${
+                aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={isMobileMenuOpen}
+                className={`lg:hidden p-2 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                   (isHeroSection || isDarkSection)
                     ? "bg-white/10 text-white hover:bg-white/20"
                     : "bg-blue-50 text-blue-600 hover:bg-blue-100"
@@ -240,6 +289,10 @@ export function Navbar() {
 
             {/* Menu Content */}
             <motion.div
+              ref={mobileMenuRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile navigation menu"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -252,7 +305,7 @@ export function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all group"
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-inset"
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
