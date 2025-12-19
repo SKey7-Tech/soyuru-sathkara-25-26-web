@@ -1,5 +1,6 @@
 'use client';
 
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -77,6 +78,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+
             <motion.button
               onClick={() => {
                 const quickLinksSection = document.getElementById('quick-links');
@@ -87,15 +89,25 @@ export function Hero() {
               className="bg-white text-[#1d1e22] px-8 py-4 rounded-lg hover:bg-white/90 transition-all shadow-lg flex items-center gap-2 group"
             >
               {t.exploreBtn}   
+
               <motion.div
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
+                whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)" }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white text-[#1d1e22] px-8 py-4 rounded-lg hover:bg-white/90 transition-all shadow-lg flex items-center gap-2 group"
               >
-                <ArrowRight className="w-5 h-5" />
+                {t.exploreBtn}
+                <motion.div
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowRight className="w-5 h-5" />
+                </motion.div>
               </motion.div>
+
             </motion.button>
             <motion.a
               href="#about"
+
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-[#3b82f6] text-white px-8 py-4 rounded-lg hover:bg-[#2563eb] transition-colors border border-[#3b82f6] inline-block"
