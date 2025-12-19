@@ -15,9 +15,9 @@ export const en = {
     title: "Access Our Study Materials",
     subtitle: "Comprehensive resources to support your academic journey",
     primaryResources: [
-      { title: "Papers", description: "Download exam papers and practice", href: "#papers" },
-      { title: "Short Notes", description: "Quick revision summaries for all subjects", href: "#shortnotes" },
-      { title: "Theory Notes", description: "In-depth theory explanations and concepts", href: "#theorynotes" }
+      { title: "Papers", description: "Download exam papers and practice", href: "/resources" },
+      { title: "Short Notes", description: "Quick revision summaries for all subjects", href: "/resources" },
+      { title: "Theory Notes", description: "In-depth theory explanations and concepts", href: "/resources" }
     ],
     secondaryLinks: [
       { title: "Gallery", description: "Our journey in photos", href: "#gallery" },

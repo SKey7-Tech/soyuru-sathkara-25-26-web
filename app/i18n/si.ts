@@ -13,9 +13,9 @@ export const si = {
     title: "අපගේ අධ්‍යයන ද්‍රව්‍ය වෙත ප්‍රවේශ වන්න",
     subtitle: "ඔබගේ අධ්‍යාපනික ගමනට සහාය වීමට විස්තීර්ණ සම්පත්",
     primaryResources: [
-      { title: "පසුගිය ප්‍රශ්න පත්‍ර", description: "පෙර විභාග ප්‍රශ්න පත්‍ර බාගන්න සහ පුහුණු වන්න", href: "#papers" },
-      { title: "කෙටි සටහන්", description: "සියලු විෂයයන් සඳහා ඉක්මන් සංශෝධන සාරාංශ", href: "#shortnotes" },
-      { title: "න්‍යාය සටහන්", description: "ගැඹුරු න්‍යාය පැහැදිලි කිරීම් සහ සංකල්ප", href: "#theorynotes" }
+      { title: "පසුගිය ප්‍රශ්න පත්‍ර", description: "පෙර විභාග ප්‍රශ්න පත්‍ර බාගන්න සහ පුහුණු වන්න", href: "/resources" },
+      { title: "කෙටි සටහන්", description: "සියලු විෂයයන් සඳහා ඉක්මන් සංශෝධන සාරාංශ", href: "/resources" },
+      { title: "න්‍යාය සටහන්", description: "ගැඹුරු න්‍යාය පැහැදිලි කිරීම් සහ සංකල්ප", href: "/resources" }
     ],
     secondaryLinks: [
       { title: "ගැලරිය", description: "ඡායාරූපවල අපගේ ගමන", href: "#gallery" },
