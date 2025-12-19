@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, BookOpen, FileText, Image, Mail, Home } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -170,28 +171,29 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <motion.a
-              href="#home"
-              className="flex items-center gap-2 md:gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <Link href="/" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg">
               <motion.div
-                className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg"
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.6 }}
+                className="flex items-center gap-2 md:gap-3 group"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <BookOpen className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                <motion.div
+                  className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <BookOpen className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                </motion.div>
+                <div className="flex flex-col">
+                  <span className={`transition-colors ${(isHeroSection || isDarkSection) ? "text-white" : "text-blue-600"}`}>
+                    {t.hero.title}
+                  </span>
+                  <span className={`text-xs hidden sm:block transition-colors ${(isHeroSection || isDarkSection) ? "text-gray-300" : "text-gray-500"}`}>
+                    {language === "en" ? "Education Beyond Boundaries" : language === "si" ? "සීමාවන් ඉක්මවා අධ්‍යාපනය" : "எல்லைகளைக் கடந்த கல்வி"}
+                  </span>
+                </div>
               </motion.div>
-              <div className="flex flex-col">
-                <span className={`transition-colors ${(isHeroSection || isDarkSection) ? "text-white" : "text-blue-600"}`}>
-                  {t.hero.title}
-                </span>
-                <span className={`text-xs hidden sm:block transition-colors ${(isHeroSection || isDarkSection) ? "text-gray-300" : "text-gray-500"}`}>
-                  {language === "en" ? "Education Beyond Boundaries" : language === "si" ? "සීමාවන් ඉක්මවා අධ්‍යාපනය" : "எல்லைகளைக் கடந்த கல்வி"}
-                </span>
-              </div>
-            </motion.a>
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-1">
