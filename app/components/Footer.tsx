@@ -24,15 +24,15 @@ export function Footer() {
               {t.brand.description}
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+              <a href="https://www.facebook.com/efsu.soyura" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+              {/* <a href="#" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
                 <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+              </a> */}
+              {/* <a href="#" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
                 <Instagram className="w-5 h-5" />
-              </a>
+              </a> */}
               <a href="#" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
                 <Youtube className="w-5 h-5" />
               </a>
@@ -46,7 +46,7 @@ export function Footer() {
               <li><a href="#about" className="text-white/80 hover:text-white transition-colors">{t.quickLinks.about}</a></li>
               <li><a href="#" className="text-white/80 hover:text-white transition-colors">{t.quickLinks.resources}</a></li>
               <li><a href="#gallery" className="text-white/80 hover:text-white transition-colors">{t.quickLinks.gallery}</a></li>
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Past Papers</a></li>
+              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Papers</a></li>
               <li><a href="#" className="text-white/80 hover:text-white transition-colors">Short Notes</a></li>
             </ul>
           </div>
