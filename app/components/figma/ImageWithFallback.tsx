@@ -31,7 +31,7 @@ export function ImageWithFallback({
   fetchPriority = 'auto',
   fill = false,
   sizes,
-  quality = 90,
+  quality = 75,
 }: ImageWithFallbackProps) {
   const [didError, setDidError] = useState(false)
   const isPriority = fetchPriority === 'high';

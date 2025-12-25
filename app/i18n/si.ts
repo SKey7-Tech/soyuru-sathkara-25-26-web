@@ -15,7 +15,7 @@ export const si = {
     primaryResources: [
       { title: "පසුගිය ප්‍රශ්න පත්‍ර", description: "පෙර විභාග ප්‍රශ්න පත්‍ර බාගන්න සහ පුහුණු වන්න", href: "/resources" },
       { title: "කෙටි සටහන්", description: "සියලු විෂයයන් සඳහා ඉක්මන් සංශෝධන සාරාංශ", href: "/resources" },
-      { title: "න්‍යාය සටහන්", description: "ගැඹුරු න්‍යාය පැහැදිලි කිරීම් සහ සංකල්ප", href: "/resources" }
+      { title: "සාකච්ඡා", description: "පැහැදිලි කිරීම් සහ සංකල්ප", href: "/resources" }
     ],
     secondaryLinks: [
       { title: "ගැලරිය", description: "ඡායාරූපවල අපගේ ගමන", href: "#gallery" },

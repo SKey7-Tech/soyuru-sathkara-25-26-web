@@ -15,7 +15,7 @@ export const ta = {
     primaryResources: [
       { title: "கடந்த தேர்வு தாள்கள்", description: "முந்தைய தேர்வு தாள்களை பதிவிறக்கி பயிற்சி செய்யவும்", href: "/resources" },
       { title: "சுருக்கமான குறிப்புகள்", description: "அனைத்து பாடங்களுக்கும் விரைவான திருத்த சுருக்கங்கள்", href: "/resources" },
-      { title: "கோட்பாடு குறிப்புகள்", description: "ஆழமான கோட்பாடு விளக்கங்கள் மற்றும் கருத்துகள்", href: "/resources" }
+      { title: "விவாதங்கள்", description: "விளக்கங்கள் மற்றும் கருத்துக்கள்", href: "/resources" }
     ],
     secondaryLinks: [
       { title: "படத்தொகுப்பு", description: "புகைப்படங்களில் எங்கள் பயணம்", href: "#gallery" },

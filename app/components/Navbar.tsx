@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, BookOpen, FileText, Image, Mail, Home } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -14,8 +15,51 @@ export function Navbar() {
   const [isDarkSection, setIsDarkSection] = useState(false);
   const { language, setLanguage } = useLanguage();
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const t = translations[language];
+
+  // Function to handle smooth scroll without changing URL
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Check if it's a regular route (not a hash link)
+    if (!href.startsWith('#')) {
+      // Let Next.js handle regular navigation
+      return;
+    }
+
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    
+    // If we're on the home page and the element exists, scroll to it
+    if (pathname === '/' && element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setIsMobileMenuOpen(false);
+    } else if (pathname !== '/') {
+      // If we're on a different page, store the target and navigate to home
+      sessionStorage.setItem('scrollTarget', targetId);
+      router.push('/');
+      setIsMobileMenuOpen(false);
+    }
+  };
+
+  // Scroll to target section after navigation
+  useEffect(() => {
+    const scrollTarget = sessionStorage.getItem('scrollTarget');
+    if (scrollTarget && pathname === '/') {
+      // Small delay to ensure the page has rendered
+      const timeoutId = setTimeout(() => {
+        const element = document.getElementById(scrollTarget);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        sessionStorage.removeItem('scrollTarget');
+      }, 100);
+      
+      return () => clearTimeout(timeoutId);
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -123,17 +167,17 @@ export function Navbar() {
     },
     {
       name: language === "en" ? "Papers" : language === "si" ? "ප්‍රශ්න පත්‍ර" : "தாள்கள்",
-      href: "#papers",
+      href: "/resources",
       icon: BookOpen
     },
     {
       name: language === "en" ? "Short Notes" : language === "si" ? "කෙටි සටහන්" : "குறுகிய குறிப்புகள்",
-      href: "#shortnotes",
+      href: "/resources",
       icon: FileText
     },
     {
       name: language === "en" ? "Theory Notes" : language === "si" ? "න්‍යාය සටහන්" : "கோட்பாடு குறிப்புகள்",
-      href: "#theorynotes",
+      href: "/resources",
       icon: FileText
     },
     {
@@ -199,8 +243,9 @@ export function Navbar() {
             <div className="hidden lg:flex items-center gap-1">
               {navLinks.map((link, index) => (
                 <motion.a
-                  key={link.href}
+                  key={index}
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className={`px-4 py-2 rounded-lg transition-all relative group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                     (isHeroSection || isDarkSection)
                       ? "text-white hover:text-blue-300 hover:bg-white/10 focus-visible:bg-white/10" 
@@ -304,9 +349,9 @@ export function Navbar() {
               <div className="p-6 space-y-2">
                 {navLinks.map((link, index) => (
                   <motion.a
-                    key={link.href}
+                    key={index}
                     href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={(e) => handleNavClick(e, link.href)}
                     className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-inset"
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
