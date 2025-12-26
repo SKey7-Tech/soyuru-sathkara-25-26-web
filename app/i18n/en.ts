@@ -15,9 +15,9 @@ export const en = {
     title: "Access Our Study Materials",
     subtitle: "Comprehensive resources to support your academic journey",
     primaryResources: [
-      { title: "Papers", description: "Download exam papers and practice", href: "#papers" },
-      { title: "Short Notes", description: "Quick revision summaries for all subjects", href: "#shortnotes" },
-      { title: "Theory Notes", description: "In-depth theory explanations and concepts", href: "#theorynotes" }
+      { title: "Papers", description: "Download exam papers and practice", href: "/resources" },
+      { title: "Short Notes", description: "Quick revision summaries for all subjects", href: "/resources" },
+      { title: "Discussions", description: "Explanations and concepts", href: "/resources" }
     ],
     secondaryLinks: [
       { title: "Gallery", description: "Our journey in photos", href: "#gallery" },
@@ -72,7 +72,7 @@ export const en = {
   footer: {
     brand: {
       name: "Soyuru Sathkara",
-      description: "Empowering students with quality education resources and comprehensive learning materials for G.C.E. A/L examination."
+      description: "Empowering students with quality education resources and comprehensive learning materials for G.C.E. O/L examination."
     },
     quickLinks: {
       title: "Quick Links",
@@ -84,9 +84,7 @@ export const en = {
       title: "Resources",
       videos: "Video Lessons",
       notes: "Study Notes",
-      shortNotes: "Short Notes",
-      downloads: "Downloads",
-      faqs: "FAQs"
+      shortNotes: "Short Notes"
     },
     contact: {
       title: "Contact Us"

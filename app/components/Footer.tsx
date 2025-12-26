@@ -1,12 +1,37 @@
 "use client";
 
 import { BookOpen, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import { useRouter, usePathname } from "next/navigation";
 import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
 
 export function Footer() {
   const { language } = useLanguage();
   const t = translations[language].footer;
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // Function to handle smooth scroll without changing URL
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Check if it's a regular route (not a hash link)
+    if (!href.startsWith('#')) {
+      // Let Next.js handle regular navigation
+      return;
+    }
+
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    
+    // If we're on the home page and the element exists, scroll to it
+    if (pathname === '/' && element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (pathname !== '/') {
+      // If we're on a different page, store the target and navigate to home
+      sessionStorage.setItem('scrollTarget', targetId);
+      router.push('/');
+    }
+  };
 
   return (
     <footer id="contact" className="bg-gradient-to-br from-[#1d1e22] via-[#393f4d] to-[#1d1e22] text-white">
@@ -33,7 +58,7 @@ export function Footer() {
               {/* <a href="#" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
                 <Instagram className="w-5 h-5" />
               </a> */}
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+              <a href="https://www.youtube.com/@SoyuruSathkaraya" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
                 <Youtube className="w-5 h-5" />
               </a>
             </div>
@@ -43,11 +68,11 @@ export function Footer() {
           <div>
             <h3 className="text-xl mb-6">{t.quickLinks.title}</h3>
             <ul className="space-y-3">
-              <li><a href="#about" className="text-white/80 hover:text-white transition-colors">{t.quickLinks.about}</a></li>
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">{t.quickLinks.resources}</a></li>
-              <li><a href="#gallery" className="text-white/80 hover:text-white transition-colors">{t.quickLinks.gallery}</a></li>
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Papers</a></li>
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Short Notes</a></li>
+              <li><a href="#about" onClick={(e) => handleLinkClick(e, '#about')} className="text-white/80 hover:text-white transition-colors">{t.quickLinks.about}</a></li>
+              <li><a href="/resources" onClick={(e) => handleLinkClick(e, '/resources')} className="text-white/80 hover:text-white transition-colors">{t.quickLinks.resources}</a></li>
+              <li><a href="#gallery" onClick={(e) => handleLinkClick(e, '#gallery')} className="text-white/80 hover:text-white transition-colors">{t.quickLinks.gallery}</a></li>
+              <li><a href="/resources" onClick={(e) => handleLinkClick(e, '/resources')} className="text-white/80 hover:text-white transition-colors">Papers</a></li>
+              <li><a href="/resources" onClick={(e) => handleLinkClick(e, '/resources')} className="text-white/80 hover:text-white transition-colors">Short Notes</a></li>
             </ul>
           </div>
 
@@ -58,8 +83,6 @@ export function Footer() {
               <li><a href="#" className="text-white/80 hover:text-white transition-colors">{t.resources.videos}</a></li>
               <li><a href="#" className="text-white/80 hover:text-white transition-colors">{t.resources.notes}</a></li>
               <li><a href="#" className="text-white/80 hover:text-white transition-colors">{t.resources.shortNotes}</a></li>
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">{t.resources.downloads}</a></li>
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">{t.resources.faqs}</a></li>
             </ul>
           </div>
 
@@ -69,11 +92,7 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-[#3b82f6] flex-shrink-0 mt-1" />
-                <span className="text-white/80">contact@soyurusathkara.lk</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-[#3b82f6] flex-shrink-0 mt-1" />
-                <span className="text-white/80">+94 XX XXX XXXX</span>
+                <span className="text-white/80">soyuru-sathkara@efsu-uom.lk</span>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#3b82f6] flex-shrink-0 mt-1" />

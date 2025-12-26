@@ -13,9 +13,9 @@ export const si = {
     title: "අපගේ අධ්‍යයන ද්‍රව්‍ය වෙත ප්‍රවේශ වන්න",
     subtitle: "ඔබගේ අධ්‍යාපනික ගමනට සහාය වීමට විස්තීර්ණ සම්පත්",
     primaryResources: [
-      { title: "පසුගිය ප්‍රශ්න පත්‍ර", description: "පෙර විභාග ප්‍රශ්න පත්‍ර බාගන්න සහ පුහුණු වන්න", href: "#papers" },
-      { title: "කෙටි සටහන්", description: "සියලු විෂයයන් සඳහා ඉක්මන් සංශෝධන සාරාංශ", href: "#shortnotes" },
-      { title: "න්‍යාය සටහන්", description: "ගැඹුරු න්‍යාය පැහැදිලි කිරීම් සහ සංකල්ප", href: "#theorynotes" }
+      { title: "පසුගිය ප්‍රශ්න පත්‍ර", description: "පෙර විභාග ප්‍රශ්න පත්‍ර බාගන්න සහ පුහුණු වන්න", href: "/resources" },
+      { title: "කෙටි සටහන්", description: "සියලු විෂයයන් සඳහා ඉක්මන් සංශෝධන සාරාංශ", href: "/resources" },
+      { title: "සාකච්ඡා", description: "පැහැදිලි කිරීම් සහ සංකල්ප", href: "/resources" }
     ],
     secondaryLinks: [
       { title: "ගැලරිය", description: "ඡායාරූපවල අපගේ ගමන", href: "#gallery" },
@@ -70,7 +70,7 @@ export const si = {
   footer: {
     brand: {
       name: "සොයුරු සත්කාර",
-      description: "ජී.සී.ඊ උ.පො.ස විභාගය සඳහා ගුණාත්මක අධ්‍යාපන සම්පත් සහ සමාග්‍රී ඉගෙනුම් ද්‍රව්‍ය සමඟ සිසුන් සවිබල ගැන්වීම."
+      description: "ජී.සී.ඊ සා.පෙළ විභාගය සඳහා ගුණාත්මක අධ්‍යාපන සම්පත් සහ සමාග්‍රී ඉගෙනුම් ද්‍රව්‍ය සමඟ සිසුන් සවිබල ගැන්වීම."
     },
     quickLinks: {
       title: "ඉක්මන් සබැඳි",
@@ -82,9 +82,7 @@ export const si = {
       title: "සම්පත්",
       videos: "වීඩියෝ පාඩම්",
       notes: "අධ්‍යයන සටහන්",
-      shortNotes: "කෙටි සටහන්",
-      downloads: "බාගත කිරීම්",
-      faqs: "නිතර අසන ප්‍රශ්න"
+      shortNotes: "කෙටි සටහන්"
     },
     contact: {
       title: "අප අමතන්න"

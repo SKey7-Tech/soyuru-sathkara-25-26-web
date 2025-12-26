@@ -2,12 +2,14 @@
 
 import { FileText, BookOpen, Image, Mail, Info, GraduationCap } from "lucide-react";
 import { motion } from "framer-motion";
+import { useRouter, usePathname } from "next/navigation";
 import { useLanguage } from "../contexts/LanguageContext";
-import { translations } from "../translations";
-
+import { translations } from "../translations";import { containerVariants, itemVariants } from "../utils/animations";
 export function QuickLinks() {
   const { language } = useLanguage();
   const t = translations[language].quickLinks;
+  const router = useRouter();
+  const pathname = usePathname();
 
   // Icon mapping for primary resources
   const primaryIcons = [FileText, BookOpen, GraduationCap];
@@ -15,24 +17,19 @@ export function QuickLinks() {
   // Icon mapping for secondary links
   const secondaryIcons = [Image, Info, Mail];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6
-      }
+  // Function to handle smooth scroll without changing URL
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    
+    // If we're on the home page and the element exists, scroll to it
+    if (pathname === '/' && element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (pathname !== '/') {
+      // If we're on a different page, store the target and navigate to home
+      sessionStorage.setItem('scrollTarget', targetId);
+      router.push('/');
     }
   };
 
@@ -55,7 +52,7 @@ export function QuickLinks() {
 
         {/* Primary Resources - Highlighted */}
         <motion.div
-          variants={containerVariants}
+          variants={containerVariants.slow}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -67,7 +64,8 @@ export function QuickLinks() {
               <motion.a
                 key={index}
                 href={link.href}
-                variants={itemVariants}
+                onClick={(e) => handleLinkClick(e, link.href)}
+                variants={itemVariants.fadeInUp}
                 whileHover={{ y: -12, scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -104,7 +102,7 @@ export function QuickLinks() {
 
         {/* Secondary Links - Smaller cards */}
         <motion.div
-          variants={containerVariants}
+          variants={containerVariants.slow}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -116,7 +114,8 @@ export function QuickLinks() {
               <motion.a
                 key={index}
                 href={link.href}
-                variants={itemVariants}
+                onClick={(e) => handleLinkClick(e, link.href)}
+                variants={itemVariants.fadeInUp}
                 whileHover={{ y: -8, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 300 }}
