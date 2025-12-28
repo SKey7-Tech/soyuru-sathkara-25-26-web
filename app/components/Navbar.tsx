@@ -167,17 +167,17 @@ export function Navbar() {
     },
     {
       name: language === "en" ? "Papers" : language === "si" ? "ප්‍රශ්න පත්‍ර" : "தாள்கள்",
-      href: "/resources",
+      href: "/resources/papers",
       icon: BookOpen
     },
     {
       name: language === "en" ? "Short Notes" : language === "si" ? "කෙටි සටහන්" : "குறுகிய குறிப்புகள்",
-      href: "/resources",
+      href: "/resources/short-notes",
       icon: FileText
     },
     {
       name: language === "en" ? "Theory Notes" : language === "si" ? "න්‍යාය සටහන්" : "கோட்பாடு குறிப்புகள்",
-      href: "/resources",
+      href: "/resources/theory",
       icon: FileText
     },
     {

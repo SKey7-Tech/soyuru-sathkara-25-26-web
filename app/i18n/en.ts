@@ -8,16 +8,19 @@ export const en = {
     description: "Providing free educational resources to underprivileged students through video lessons, comprehensive notes, and dedicated outreach programs.",
     exploreBtn: "Explore Resources",
     learnMoreBtn: "Learn More",
-    getStartedBtn: "Get Started"
+    getStartedBtn: "Get Started",
+    papersBtn: "Past Papers",
+    theoryBtn: "Theory Notes",
+    shortNotesBtn: "Short Notes"
   },
   quickLinks: {
     tag: "Learning Resources",
     title: "Access Our Study Materials",
     subtitle: "Comprehensive resources to support your academic journey",
     primaryResources: [
-      { title: "Papers", description: "Download exam papers and practice", href: "/resources" },
-      { title: "Short Notes", description: "Quick revision summaries for all subjects", href: "/resources" },
-      { title: "Discussions", description: "Explanations and concepts", href: "/resources" }
+      { title: "Past Papers", description: "Download exam papers and practice questions", href: "/resources/papers" },
+      { title: "Theory Notes", description: "In-depth explanations and comprehensive concepts", href: "/resources/theory" },
+      { title: "Short Notes", description: "Quick revision summaries for all subjects", href: "/resources/short-notes" }
     ],
     secondaryLinks: [
       { title: "Gallery", description: "Our journey in photos", href: "#gallery" },
@@ -42,6 +45,63 @@ export const en = {
       subtitle: "Join us in transforming education and empowering students in your community",
       description: "We're looking for schools that share our vision of providing quality education to all students. Partner with Soyuru Sathkara to bring comprehensive learning resources, video lessons, and study materials to your students.",
       button: "Register Your School"
+  },
+  papers: {
+    title: "Past Papers",
+    description: "Download exam papers and practice questions",
+    linkTitle: "Browse Past Papers",
+    items: {
+      "paper-2024-biology": {
+        title: "Biology 2024 Paper",
+        description: "G.C.E. A/L Biology examination paper 2024"
+      },
+      "paper-2024-physics": {
+        title: "Physics 2024 Paper",
+        description: "G.C.E. A/L Physics examination paper 2024"
+      },
+      "paper-2024-chemistry": {
+        title: "Chemistry 2024 Paper",
+        description: "G.C.E. A/L Chemistry examination paper 2024"
+      }
+    }
+  },
+  theory: {
+    title: "Theory Notes",
+    description: "In-depth theory explanations and comprehensive concepts",
+    linkTitle: "Explore Theory Notes",
+    items: {
+      "theory-biology-cell": {
+        title: "Cell Structure",
+        description: "Complete notes on cell biology and structure"
+      },
+      "theory-physics-mechanics": {
+        title: "Mechanics",
+        description: "Comprehensive physics mechanics theory"
+      },
+      "theory-chemistry-organic": {
+        title: "Organic Chemistry",
+        description: "Detailed organic chemistry concepts"
+      }
+    }
+  },
+  shortNotes: {
+    title: "Short Notes",
+    description: "Quick revision summaries and key points for all subjects",
+    linkTitle: "View Short Notes",
+    items: {
+      "short-biology-quick": {
+        title: "Biology Quick Revision",
+        description: "Essential biology concepts for quick review"
+      },
+      "short-physics-formulas": {
+        title: "Physics Formulas",
+        description: "Important physics formulas and equations"
+      },
+      "short-chemistry-equations": {
+        title: "Chemistry Equations",
+        description: "Key chemistry equations and reactions"
+      }
+    }
   },
   pdfs: {
     tag: "Downloadable Resources",
