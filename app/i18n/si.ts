@@ -16,7 +16,7 @@ export const si = {
     title: "අපගේ අධ්‍යයන ද්‍රව්‍ය වෙත ප්‍රවේශ වන්න",
     subtitle: "ඔබගේ අධ්‍යාපනික ගමනට සහාය වීමට විස්තීර්ණ සම්පත්",
     primaryResources: [
-      { title: "පසුගිය ප්‍රශ්න පත්‍ර", description: "විභාග ප්‍රශ්න පත්‍ර බාගන්න සහ පුහුණු වන්න", href: "/resources/papers" },
+      { title: "ප්‍රශ්න පත්‍ර", description: "විභාග ප්‍රශ්න පත්‍ර බාගන්න සහ පුහුණු වන්න", href: "/resources/papers" },
       { title: "න්‍යායික සටහන්", description: "ගැඹුරු පැහැදිලි කිරීම් සහ සවිස්තරාත්මක සංකල්ප", href: "/resources/theory" },
       { title: "කෙටි සටහන්", description: "සියලු විෂයයන් සඳහා ඉක්මන් සංශෝධන සාරාංශ", href: "/resources/short-notes" }
     ],
@@ -47,7 +47,7 @@ export const si = {
   papers: {
     title: "පසුගිය ප්‍රශ්න පත්‍ර",
     description: "විභාග ප්‍රශ්න පත්‍ර සහ පුහුණු ප්‍රශ්න බාගන්න",
-    linkTitle: "පසුගිය ප්‍රශ්න පත්‍ර බලන්න",
+    linkTitle: "ප්‍රශ්න පත්‍ර බලන්න",
     items: {
       "paper-2024-biology": {
         title: "ජීව විද්‍යාව 2024 ප්‍රශ්න පත්‍රය",

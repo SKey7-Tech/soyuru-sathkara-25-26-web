@@ -12,7 +12,7 @@ export const shortNotes: ShortNote[] = [
     id: "short-biology-quick",
     titleKey: "short-biology-quick",
     descriptionKey: "short-biology-quick",
-    filePath: "/files/short-notes/biology-quick-revision.pdf",
+    filePath: "/files/short-notes/Short-Note.pdf",
     coverImage: "/gallery/notes-cover.jpg",
     videos: [
       {label:"discussion_1",url:"https://www.youtube.com/watch?v=xNQjYPs6uJU&t=1s"},

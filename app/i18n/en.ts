@@ -18,7 +18,7 @@ export const en = {
     title: "Access Our Study Materials",
     subtitle: "Comprehensive resources to support your academic journey",
     primaryResources: [
-      { title: "Past Papers", description: "Download exam papers and practice questions", href: "/resources/papers" },
+      { title: "Papers", description: "Download exam papers and practice questions", href: "/resources/papers" },
       { title: "Theory Notes", description: "In-depth explanations and comprehensive concepts", href: "/resources/theory" },
       { title: "Short Notes", description: "Quick revision summaries for all subjects", href: "/resources/short-notes" }
     ],
@@ -47,7 +47,7 @@ export const en = {
       button: "Register Your School"
   },
   papers: {
-    title: "Past Papers",
+    title: "Papers",
     description: "Download exam papers and practice questions",
     linkTitle: "Browse Past Papers",
     items: {
@@ -62,6 +62,18 @@ export const en = {
       "paper-2024-chemistry": {
         title: "Chemistry 2024 Paper",
         description: "G.C.E. A/L Chemistry examination paper 2024"
+      },
+      "paper-easy-level": {
+        title: "Easy Level",
+        description: "Easy level practice questions and exercises"
+      },
+      "paper-medium-level": {
+        title: "Medium Level",
+        description: "Medium level practice questions and exercises"
+      },
+      "paper-hard-level": {
+        title: "Hard Level",
+        description: "Hard level practice questions and exercises"
       }
     }
   },
