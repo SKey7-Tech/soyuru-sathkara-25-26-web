@@ -19,6 +19,7 @@ type CardProps = {
   videos?: {label: string; url: string}[];
   onClick?: () => void;
   className?: string;
+  category?: 'papers' | 'shortNotes' | 'theory' | 'pdfs';
 };
 
 export default function Card({
@@ -33,9 +34,11 @@ export default function Card({
   videos,
   onClick,
   className = "",
+  category = 'pdfs',
 }: CardProps) {
   const { language } = useLanguage();
-  const t = translations[language].pdfs as any;
+  const t = translations[language][category] as any;
+  const pdfs = translations[language].pdfs as any; // For common UI elements
 
   // State to manage video modal visibility
   const [isExpanded, setIsExpanded] = useState(false);
@@ -178,7 +181,7 @@ export default function Card({
             className="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-linear-to-br from-[#3b82f6] to-[#2563eb] text-white rounded-xl hover:shadow-lg transition-all duration-300 font-medium"
           >
             <Download className="w-5 h-5" />
-            {t.button}
+            {pdfs.button}
           </motion.button>
         )}
 
@@ -216,7 +219,7 @@ export default function Card({
             >
               <div className="pt-2 space-y-2 border-t border-gray-100 mt-2">
                   <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                    {t.videosHeading || "Related Video Lessons"}
+                    {pdfs.videosHeading || "Related Video Lessons"}
                   </p>
                   {videos.map((video, index) => (
                     <Link
@@ -236,7 +239,7 @@ export default function Card({
                       <div className="p-1.5 bg-blue-600 rounded-md">
                         <Video className="w-4 h-4 text-white" />
                       </div>
-                      <span className="font-medium text-sm truncate">{t.videosLabel[video.label] || video.label}</span>
+                      <span className="font-medium text-sm truncate">{pdfs.videosLabel?.[video.label] || video.label}</span>
                     </motion.div>
                     </Link>
                   ))}

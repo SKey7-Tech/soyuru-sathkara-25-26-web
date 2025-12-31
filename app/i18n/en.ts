@@ -52,16 +52,16 @@ export const en = {
     linkTitle: "Browse Past Papers",
     items: {
       "paper-2024-biology": {
-        title: "Biology 2024 Paper",
-        description: "G.C.E. A/L Biology examination paper 2024"
+        title: "Easy Level Paper",
+        description: "Easy level practice questions and exercises"
       },
       "paper-2024-physics": {
-        title: "Physics 2024 Paper",
-        description: "G.C.E. A/L Physics examination paper 2024"
+        title: "Medium Level Paper",
+        description: "Medium level practice questions and exercises"
       },
       "paper-2024-chemistry": {
-        title: "Chemistry 2024 Paper",
-        description: "G.C.E. A/L Chemistry examination paper 2024"
+        title: "Hard Level Paper",
+        description: "Hard level practice questions and exercises"
       },
       "paper-easy-level": {
         title: "Easy Level",

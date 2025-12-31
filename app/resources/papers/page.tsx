@@ -51,6 +51,7 @@ export default function PapersPage() {
               downloadFileName={`${paper.id}.pdf`}
               videos={paper.videos}
               className="h-full"
+              category="papers"
             />
           ))}
         </div>

@@ -51,6 +51,7 @@ export default function ShortNotesPage() {
               downloadFileName={`${note.id}.pdf`}
               videos={note.videos}
               className="h-full"
+              category="shortNotes"
             />
           ))}
         </div>
