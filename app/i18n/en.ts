@@ -9,7 +9,7 @@ export const en = {
     exploreBtn: "Explore Resources",
     learnMoreBtn: "Learn More",
     getStartedBtn: "Get Started",
-    papersBtn: "Past Papers",
+    papersBtn: "Papers",
     theoryBtn: "Theory Notes",
     shortNotesBtn: "Short Notes"
   },
@@ -49,32 +49,34 @@ export const en = {
   papers: {
     title: "Papers",
     description: "Download exam papers and practice questions",
-    linkTitle: "Browse Past Papers",
+    linkTitle: "Browse Papers",
     items: {
-      "paper-2024-biology": {
+      "Easy-Level": {
         title: "Easy Level Paper",
         description: "Easy level practice questions and exercises"
       },
-      "paper-2024-physics": {
+      "Medium-Level": {
         title: "Medium Level Paper",
         description: "Medium level practice questions and exercises"
       },
-      "paper-2024-chemistry": {
+      "Hard-Level": {
         title: "Hard Level Paper",
         description: "Hard level practice questions and exercises"
       },
-      "paper-easy-level": {
-        title: "Easy Level",
-        description: "Easy level practice questions and exercises"
-      },
-      "paper-medium-level": {
-        title: "Medium Level",
-        description: "Medium level practice questions and exercises"
-      },
-      "paper-hard-level": {
-        title: "Hard Level",
-        description: "Hard level practice questions and exercises"
-      }
+
+      // // check above
+      // "paper-easy-level": {
+      //   title: "Easy Level",
+      //   description: "Easy level practice questions and exercises"
+      // },
+      // "paper-medium-level": {
+      //   title: "Medium Level",
+      //   description: "Medium level practice questions and exercises"
+      // },
+      // "paper-hard-level": {
+      //   title: "Hard Level",
+      //   description: "Hard level practice questions and exercises"
+      // }
     }
   },
   theory: {
@@ -101,9 +103,9 @@ export const en = {
     description: "Quick revision summaries and key points for all subjects",
     linkTitle: "View Short Notes",
     items: {
-      "short-biology-quick": {
-        title: "Biology Quick Revision",
-        description: "Essential biology concepts for quick review"
+      "short-note": {
+        title: "Short Note for Mathematics",
+        description: "Essential Mathematics concepts for quick review"
       },
       "short-physics-formulas": {
         title: "Physics Formulas",
@@ -162,7 +164,7 @@ export const en = {
       title: "Contact Us"
     },
     bottom: {
-      copyright: "© 2024 Soyuru Sathkara. All rights reserved.",
+      copyright: "© 2026 Soyuru Sathkara. All rights reserved.",
       privacy: "Privacy Policy",
       terms: "Terms of Service"
     }

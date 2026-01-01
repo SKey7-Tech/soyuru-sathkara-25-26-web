@@ -9,9 +9,9 @@ export type Paper = {
 
 export const papers: Paper[] = [
   {
-    id: "paper-2024-biology",
-    titleKey: "paper-2024-biology",
-    descriptionKey: "paper-2024-biology",
+    id: "Easy-Level",
+    titleKey: "Easy-Level",
+    descriptionKey: "Easy-Level",
     filePath: "/files/papers/Easy-Level.pdf",
     coverImage: "/gallery/paper-cover.jpeg",
     videos: [
@@ -20,9 +20,9 @@ export const papers: Paper[] = [
     ],
   },
   {
-    id: "paper-2024-physics",
-    titleKey: "paper-2024-physics",
-    descriptionKey: "paper-2024-physics",
+    id: "Medium-Level",
+    titleKey: "Medium-Level",
+    descriptionKey: "Medium-Level",
     filePath: "/files/papers/Medium-Level.pdf",
     coverImage: "/gallery/paper-cover.jpeg",
     videos: [
@@ -30,9 +30,9 @@ export const papers: Paper[] = [
     ],
   },
   {
-    id: "paper-2024-chemistry",
-    titleKey: "paper-2024-chemistry",
-    descriptionKey: "paper-2024-chemistry",
+    id: "Hard-Level",
+    titleKey: "Hard-Level",
+    descriptionKey: "Hard-Level",
     filePath: "/files/papers/Hard-Level.pdf",
     coverImage: "/gallery/paper-cover.jpeg",
     videos: [
