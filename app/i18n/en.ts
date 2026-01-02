@@ -1,4 +1,6 @@
 import { video } from "framer-motion/client";
+import { papers } from "../data/papers";
+import { theory } from "../data/theory";
 
 export const en = {
   hero: {
@@ -24,8 +26,8 @@ export const en = {
     ],
     secondaryLinks: [
       { title: "Gallery", description: "Our journey in photos", href: "#gallery" },
-      { title: "About Us", description: "Learn about our mission", href: "#about" },
-      { title: "Contact Us", description: "Get in touch with us", href: "#contact" }
+      { title: "About Us", description: "Learn about our mission", href: "https://efsu-uom.lk/about" },
+      { title: "Contact Us", description: "Get in touch with us", href: "https://efsu-uom.lk/contact" }
     ]
   },
   gallery: {
@@ -152,7 +154,10 @@ export const en = {
       title: "Quick Links",
       about: "About Us",
       resources: "Resources",
-      gallery: "Gallery"
+      gallery: "Gallery",
+      papers: "Papers",
+      theory: "Theory Notes",
+      shortNotes: "Short Notes"
     },
     resources: {
       title: "Resources",

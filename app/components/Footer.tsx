@@ -68,12 +68,12 @@ export function Footer() {
           <div>
             <h3 className="text-xl mb-6">{t.quickLinks.title}</h3>
             <ul className="space-y-3">
-              <li><a href="#about" onClick={(e) => handleLinkClick(e, '#about')} className="text-white/80 hover:text-white transition-colors">{t.quickLinks.about}</a></li>
+              <li><a href="https://efsu-uom.lk/about" onClick={(e) => handleLinkClick(e, 'https://efsu-uom.lk/about')} className="text-white/80 hover:text-white transition-colors">{t.quickLinks.about}</a></li>
               
               <li><a href="#gallery" onClick={(e) => handleLinkClick(e, '#gallery')} className="text-white/80 hover:text-white transition-colors">{t.quickLinks.gallery}</a></li>
-              <li><a href="/resources/papers" onClick={(e) => handleLinkClick(e, '/resources/papers')} className="text-white/80 hover:text-white transition-colors">Papers</a></li>
-              <li><a href="/resources/theory" onClick={(e) => handleLinkClick(e, '/resources/theory')} className="text-white/80 hover:text-white transition-colors">Theory</a></li>
-              <li><a href="/resources/short-notes" onClick={(e) => handleLinkClick(e, '/resources/short-notes')} className="text-white/80 hover:text-white transition-colors">Short Notes</a></li>
+              <li><a href="/resources/papers" onClick={(e) => handleLinkClick(e, '/resources/papers')} className="text-white/80 hover:text-white transition-colors">{t.quickLinks.papers}</a></li>
+              <li><a href="/resources/theory" onClick={(e) => handleLinkClick(e, '/resources/theory')} className="text-white/80 hover:text-white transition-colors">{t.quickLinks.theory}</a></li>
+              <li><a href="/resources/short-notes" onClick={(e) => handleLinkClick(e, '/resources/short-notes')} className="text-white/80 hover:text-white transition-colors">{t.quickLinks.shortNotes}</a></li>
             </ul>
           </div>
 

@@ -22,8 +22,8 @@ export const si = {
     ],
     secondaryLinks: [
       { title: "ගැලරිය", description: "ඡායාරූපවල අපගේ ගමන", href: "#gallery" },
-      { title: "අප ගැන", description: "අපගේ මෙහෙවර ගැන දැනගන්න", href: "#about" },
-      { title: "අප හා සම්බන්ධ වන්න", description: "අප හා සම්බන්ධ වන්න", href: "#contact" }
+      { title: "අප ගැන", description: "අපගේ මෙහෙවර ගැන දැනගන්න", href: "https://efsu-uom.lk/about" },
+      { title: "අප හා සම්බන්ධ වන්න", description: "අප හා සම්බන්ධ වන්න", href: "https://efsu-uom.lk/contact" }
     ]
   },
   gallery: {
@@ -136,7 +136,10 @@ export const si = {
       title: "ඉක්මන් සබැඳි",
       about: "අප ගැන",
       resources: "සම්පත්",
-      gallery: "ගැලරිය"
+      gallery: "ගැලරිය",
+      papers: "ප්‍රශ්න පත්‍ර",
+      theory: "න්‍යායික සටහන්",
+      shortNotes: "කෙටි සටහන්"
     },
     resources: {
       title: "සම්පත්",

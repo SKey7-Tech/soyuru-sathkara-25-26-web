@@ -1,3 +1,5 @@
+import { papers } from "../data/papers";
+
 export const ta = {
   hero: {
     badge: "அனை ருக்கும் கல்வியை வலுப்படுத்துதல்",
@@ -22,8 +24,8 @@ export const ta = {
     ],
     secondaryLinks: [
       { title: "படத்தொகுப்பு", description: "புகைப்படங்களில் எங்கள் பயணம்", href: "#gallery" },
-      { title: "எங்களை பற்றி", description: "எங்கள் நோக்கத்தை அறியுங்கள்", href: "#about" },
-      { title: "எங்களை தொடர்பு கொள்ளுங்கள்", description: "எங்களுடன் தொடர்பு கொள்ளுங்கள்", href: "#contact" }
+      { title: "எங்களை பற்றி", description: "எங்கள் நோக்கத்தை அறியுங்கள்", href: "https://efsu-uom.lk/about" },
+      { title: "எங்களை தொடர்பு கொள்ளுங்கள்", description: "எங்களுடன் தொடர்பு கொள்ளுங்கள்", href: "https://efsu-uom.lk/contact" }
     ]
   },
   gallery: {
@@ -136,7 +138,10 @@ export const ta = {
       title: "விரைவு இணைப்புகள்",
       about: "எங்களை பற்றி",
       resources: "வளங்கள்",
-      gallery: "கேலரி"
+      gallery: "கேலரி",
+      papers: "தேர்வுத் தாள்கள்",
+      theory: "கோட்பாடு குறிப்புகள்",
+      shortNotes: "சுருக்கமான குறிப்புகள்"
     },
     resources: {
       title: "வளங்கள்",

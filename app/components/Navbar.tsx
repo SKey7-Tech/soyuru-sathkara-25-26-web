@@ -187,7 +187,7 @@ export function Navbar() {
     },
     {
       name: language === "en" ? "Contact" : language === "si" ? "අමතන්න" : "தொடர்பு",
-      href: "#contact",
+      href: "https://efsu-uom.lk/contact",
       icon: Mail
     }
   ];

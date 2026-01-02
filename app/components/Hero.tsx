@@ -116,7 +116,9 @@ export function Hero() {
           {/* Learn More Button */}
           <div className="flex items-center justify-center">
             <motion.a
-              href="#about"
+              href="https://efsu-uom.lk/about"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-white/10 backdrop-blur-sm text-white px-8 py-3 rounded-lg hover:bg-white/20 transition-all border border-white/30 inline-flex items-center gap-2"

@@ -23,7 +23,7 @@ export function QuickLinks() {
     e.preventDefault();
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
-    
+
     // If we're on the home page and the element exists, scroll to it
     if (pathname === '/' && element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -117,11 +117,15 @@ export function QuickLinks() {
         >
           {t.secondaryLinks.map((link, index) => {
             const Icon = secondaryIcons[index];
+            const isExternal = link.href.startsWith('http');
+
             return (
               <motion.a
                 key={index}
                 href={link.href}
-                onClick={(e) => handleLinkClick(e, link.href)}
+                onClick={isExternal ? undefined : (e) => handleLinkClick(e, link.href)}
+                target={isExternal ? "_blank" : undefined}
+                rel = {isExternal ? "noopener noreferrer" : undefined}
                 variants={itemVariants.fadeInUp}
                 whileHover={{ y: -8, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
