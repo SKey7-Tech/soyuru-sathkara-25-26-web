@@ -110,7 +110,11 @@ export const si = {
     videosLabel : {
       "discussion_1": "සාකච්ඡාව 01",
       "discussion_2": "සාකච්ඡාව 02",
-      "discussion_3": "සාකච්ඡාව 03"
+      "discussion_3": "සාකච්ඡාව 03",
+      "discussion_4": "සාකච්ඡාව 04",
+      "discussion_5": "සාකච්ඡාව 05",
+      "discussion_6": "සාකච්ඡාව 06",
+      "discussion_7": "සාකච්ඡාව 07"
     },
     items: {
       "handbook-2025": {
@@ -151,7 +155,7 @@ export const si = {
       title: "අප අමතන්න"
     },
     bottom: {
-      copyright: "© 2024 සොයුරු සත්කාර. සියලුම හිමිකම් ඇවිරිණි.",
+      copyright: "© 2026 සොයුරු සත්කාර. සියලුම හිමිකම් ඇවිරිණි.",
       privacy: "රහස්‍යතා ප්‍රතිපත්තිය",
       terms: "සේවා කොන්දේසි"
     }

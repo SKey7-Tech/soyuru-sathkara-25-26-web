@@ -128,7 +128,11 @@ export const en = {
     videosLabel : {
       "discussion_1": "Discussion Part 1",
       "discussion_2": "Discussion Part 2",
-      "discussion_3": "Discussion Part 3"
+      "discussion_3": "Discussion Part 3",
+      "discussion_4": "Discussion Part 4",
+      "discussion_5": "Discussion Part 5",
+      "discussion_6": "Discussion Part 6",
+      "discussion_7": "Discussion Part 7"
     },
     items: {
       "handbook-2025": {

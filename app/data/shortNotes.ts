@@ -15,7 +15,7 @@ export const shortNotes: ShortNote[] = [
     filePath: "/files/short-notes/Short-Note.pdf",
     coverImage: "/gallery/notes-cover.jpg",
     videos: [
-      {label:"discussion_1",url:"https://www.youtube.com/watch?v=xNQjYPs6uJU&t=1s"},
+      // {label:"discussion_1",url:"https://www.youtube.com/watch?v=xNQjYPs6uJU&t=1s"},
     ],
   },
   // add components for the below short notes when ready, use the given structure
