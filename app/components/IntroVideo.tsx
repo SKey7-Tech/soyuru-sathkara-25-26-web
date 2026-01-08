@@ -13,7 +13,7 @@ export function IntroVideo() {
 
 
   return (
-    <section className="py-24 bg-gradient-to-b from-[#d4d4dc]/20 to-white">
+    <section className="py-24 bg-gradient-to-b from-white to-blue-50/30">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,7 +43,7 @@ export function IntroVideo() {
                 <div 
                   className="absolute inset-0 bg-cover bg-center"
                   style={{
-                    backgroundImage: 'url(https://scontent.fcmb2-2.fna.fbcdn.net/v/t39.30808-6/469118298_1083640933800137_4831837192517632709_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGhXxiisL36sRgaFnzVfqs_MVYYZYKFh8sxVhhlgoWHyz2P0Wyitj4_oT79TRP6MpdfOe7szwycbqkecOPUB8_6&_nc_ohc=9MJ9K-HGaIIQ7kNvwFlulyz&_nc_oc=AdnXaLJLRmSbRIbSjGO0lIMtHURBUaw69TkvAwnUA9lVjpmZuWAxZfwRUjSdNAQGzeM&_nc_zt=23&_nc_ht=scontent.fcmb2-2.fna&_nc_gid=B8_3DpQu-NVuxbh88oLj9g&oh=00_AflsHew6haVh3RX9-EaSMVQgALlWeMKtnZne-Is1X7Z60g&oe=69400904)'
+                    backgroundImage: 'url(/gallery/ss5.jpg)'
                   }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-[#1d1e22]/80 via-[#1d1e22]/40 to-transparent"></div>

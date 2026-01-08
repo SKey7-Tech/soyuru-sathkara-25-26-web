@@ -6,21 +6,24 @@ export const si = {
     description: "වීඩියෝ පාඩම්, සවිස්තරාත්මක සටහන් සහ කැපවූ ප්‍රවේශ වැඩසටහන් හරහා අඩු ආදායම් ලබන සිසුන්ට නොමිලේ අධ්‍යාපන සම්පත් සැපයීම.",
     exploreBtn: "සම්පත් ගවේෂණය කරන්න",
     learnMoreBtn: "වැඩි විස්තර",
-    getStartedBtn: "ආරම්භ කරන්න"
+    getStartedBtn: "ආරම්භ කරන්න",
+    papersBtn: "ප්‍රශ්න පත්‍ර",
+    theoryBtn: "න්‍යායික සටහන්",
+    shortNotesBtn: "කෙටි සටහන්"
   },
   quickLinks: {
     tag: "ඉගෙනුම් සම්පත්",
     title: "අපගේ අධ්‍යයන ද්‍රව්‍ය වෙත ප්‍රවේශ වන්න",
     subtitle: "ඔබගේ අධ්‍යාපනික ගමනට සහාය වීමට විස්තීර්ණ සම්පත්",
     primaryResources: [
-      { title: "පසුගිය ප්‍රශ්න පත්‍ර", description: "පෙර විභාග ප්‍රශ්න පත්‍ර බාගන්න සහ පුහුණු වන්න", href: "#papers" },
-      { title: "කෙටි සටහන්", description: "සියලු විෂයයන් සඳහා ඉක්මන් සංශෝධන සාරාංශ", href: "#shortnotes" },
-      { title: "න්‍යාය සටහන්", description: "ගැඹුරු න්‍යාය පැහැදිලි කිරීම් සහ සංකල්ප", href: "#theorynotes" }
+      { title: "ප්‍රශ්න පත්‍ර", description: "විභාග ප්‍රශ්න පත්‍ර බාගන්න සහ පුහුණු වන්න", href: "/resources/papers" },
+      { title: "න්‍යායික සටහන්", description: "ගැඹුරු පැහැදිලි කිරීම් සහ සවිස්තරාත්මක සංකල්ප", href: "/resources/theory" },
+      { title: "කෙටි සටහන්", description: "සියලු විෂයයන් සඳහා ඉක්මන් සංශෝධන සාරාංශ", href: "/resources/short-notes" }
     ],
     secondaryLinks: [
       { title: "ගැලරිය", description: "ඡායාරූපවල අපගේ ගමන", href: "#gallery" },
-      { title: "අප ගැන", description: "අපගේ මෙහෙවර ගැන දැනගන්න", href: "#about" },
-      { title: "අප හා සම්බන්ධ වන්න", description: "අප හා සම්බන්ධ වන්න", href: "#contact" }
+      { title: "අප ගැන", description: "අපගේ මෙහෙවර ගැන දැනගන්න", href: "https://efsu-uom.lk/about" },
+      { title: "අප හා සම්බන්ධ වන්න", description: "අප හා සම්බන්ධ වන්න", href: "https://efsu-uom.lk/contact" }
     ]
   },
   gallery: {
@@ -41,6 +44,63 @@ export const si = {
     description: "සියලු සිසුන්ට ගුණාත්මක අධ්‍යාපනයක් ලබා දීමේ අපගේ දැක්ම බෙදාගන්නා පාසල් අපි සොයමින් සිටිමු. සවිස්තරාත්මක ඉගෙනුම් සම්පත්, වීඩියෝ පාඩම් සහ අධ්‍යයන ද්‍රව්‍ය ඔබේ සිසුන්ට ගෙන ඒමට Soyuru Sathkara සමඟ හවුල් වන්න.",
     button: "ඔබේ පාසල ලියාපදිංචි කරන්න"
   },
+  papers: {
+    title: "ප්‍රශ්න පත්‍ර",
+    description: "විභාග ප්‍රශ්න පත්‍ර සහ පුහුණු ප්‍රශ්න බාගන්න",
+    linkTitle: "ප්‍රශ්න පත්‍ර බලන්න",
+    items: {
+      "Easy-Level": {
+        title: "පහසු මට්ටමේ ප්‍රශ්න පත්‍රය",
+        description: "පහසු මට්ටමේ පුහුණු ප්‍රශ්න සහ අභ්‍යාස"
+      },
+      "Medium-Level": {
+        title: "මධ්‍යම මට්ටමේ ප්‍රශ්න පත්‍රය",
+        description: "මධ්‍යම මට්ටමේ පුහුණු ප්‍රශ්න සහ අභ්‍යාස"
+      },
+      "Hard-Level": {
+        title: "අභියෝගාත්මක මට්ටමේ ප්‍රශ්න පත්‍රය",
+        description: "අභියෝගාත්මක මට්ටමේ පුහුණු ප්‍රශ්න සහ අභ්‍යාස"
+      }
+    }
+  },
+  theory: {
+    title: "න්‍යායික සටහන්",
+    description: "ගැඹුරු න්‍යායික පැහැදිලි කිරීම් සහ සවිස්තරාත්මක සංකල්ප",
+    linkTitle: "න්‍යායික සටහන් ගවේෂණය කරන්න",
+    items: {
+      "theory-biology-cell": {
+        title: "සෛල ව්‍යුහය",
+        description: "සෛල ජීව විද්‍යාව සහ ව්‍යුහය පිළිබඳ සම්පූර්ණ සටහන්"
+      },
+      "theory-physics-mechanics": {
+        title: "යාන්ත්‍රික විද්‍යාව",
+        description: "සවිස්තරාත්මක භෞතික යාන්ත්‍රික න්‍යාය"
+      },
+      "theory-chemistry-organic": {
+        title: "කාබනික රසායන විද්‍යාව",
+        description: "සවිස්තරාත්මක කාබනික රසායන සංකල්ප"
+      }
+    }
+  },
+  shortNotes: {
+    title: "කෙටි සටහන්",
+    description: "සියලු විෂයයන් සඳහා ඉක්මන් සංශෝධන සාරාංශ සහ ප්‍රධාන කරුණු",
+    linkTitle: "කෙටි සටහන් බලන්න",
+    items: {
+      "short-note": {
+        title: "ගණිතය සඳහා කෙටි සටහනක්",
+        description: "ඉක්මන් සමාලෝචනය සඳහා අත්‍යවශ්‍ය ගණිත සංකල්ප"
+      },
+      "short-physics-formulas": {
+        title: "භෞතික විද්‍යා සූත්‍ර",
+        description: "වැදගත් භෞතික විද්‍යා සූත්‍ර සහ සමීකරණ"
+      },
+      "short-chemistry-equations": {
+        title: "රසායන විද්‍යා සමීකරණ",
+        description: "ප්‍රධාන රසායන සමීකරණ සහ ප්‍රතික්‍රියා"
+      }
+    }
+  },
   pdfs: {
     tag: "බාගත කළ හැකි සම්පත්",
     title: "අපගේ ලේඛන වෙත ප්‍රවේශ වන්න",
@@ -50,7 +110,11 @@ export const si = {
     videosLabel : {
       "discussion_1": "සාකච්ඡාව 01",
       "discussion_2": "සාකච්ඡාව 02",
-      "discussion_3": "සාකච්ඡාව 03"
+      "discussion_3": "සාකච්ඡාව 03",
+      "discussion_4": "සාකච්ඡාව 04",
+      "discussion_5": "සාකච්ඡාව 05",
+      "discussion_6": "සාකච්ඡාව 06",
+      "discussion_7": "සාකච්ඡාව 07"
     },
     items: {
       "handbook-2025": {
@@ -70,27 +134,28 @@ export const si = {
   footer: {
     brand: {
       name: "සොයුරු සත්කාර",
-      description: "ජී.සී.ඊ උ.පො.ස විභාගය සඳහා ගුණාත්මක අධ්‍යාපන සම්පත් සහ සමාග්‍රී ඉගෙනුම් ද්‍රව්‍ය සමඟ සිසුන් සවිබල ගැන්වීම."
+      description: "ජී.සී.ඊ සා.පෙළ විභාගය සඳහා ගුණාත්මක අධ්‍යාපන සම්පත් සහ සමාග්‍රී ඉගෙනුම් ද්‍රව්‍ය සමඟ සිසුන් සවිබල ගැන්වීම."
     },
     quickLinks: {
       title: "ඉක්මන් සබැඳි",
       about: "අප ගැන",
       resources: "සම්පත්",
-      gallery: "ගැලරිය"
+      gallery: "ගැලරිය",
+      papers: "ප්‍රශ්න පත්‍ර",
+      theory: "න්‍යායික සටහන්",
+      shortNotes: "කෙටි සටහන්"
     },
     resources: {
       title: "සම්පත්",
       videos: "වීඩියෝ පාඩම්",
       notes: "අධ්‍යයන සටහන්",
-      shortNotes: "කෙටි සටහන්",
-      downloads: "බාගත කිරීම්",
-      faqs: "නිතර අසන ප්‍රශ්න"
+      shortNotes: "කෙටි සටහන්"
     },
     contact: {
       title: "අප අමතන්න"
     },
     bottom: {
-      copyright: "© 2024 සොයුරු සත්කාර. සියලුම හිමිකම් ඇවිරිණි.",
+      copyright: "© 2026 සොයුරු සත්කාර. සියලුම හිමිකම් ඇවිරිණි.",
       privacy: "රහස්‍යතා ප්‍රතිපත්තිය",
       terms: "සේවා කොන්දේසි"
     }

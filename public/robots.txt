@@ -1,0 +1,9 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://ss.efsu-uom.lk/sitemap.xml
+
+# Block admin or private areas (if any)
+Disallow: /api/

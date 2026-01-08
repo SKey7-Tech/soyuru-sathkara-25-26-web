@@ -1,9 +1,9 @@
 "use client";
 
-import React, { ReactNode,useState } from "react";
+import React, { ReactNode, useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Download, FileText,Video } from "lucide-react";
+import { Download, FileText, Video, ChevronDown } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
 
@@ -19,6 +19,7 @@ type CardProps = {
   videos?: {label: string; url: string}[];
   onClick?: () => void;
   className?: string;
+  category?: 'papers' | 'shortNotes' | 'theory' | 'pdfs';
 };
 
 export default function Card({
@@ -33,12 +34,28 @@ export default function Card({
   videos,
   onClick,
   className = "",
+  category = 'pdfs',
 }: CardProps) {
   const { language } = useLanguage();
-  const t = translations[language].pdfs as any;
+  const t = translations[language][category] as any;
+  const pdfs = translations[language].pdfs as any; // For common UI elements
 
   // State to manage video modal visibility
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+
+  // Detect if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Resolve title: use titleKey first, then fallback to title prop
   const resolvedTitle = titleKey && t?.items?.[titleKey]?.title ? t.items[titleKey].title : title;
@@ -89,8 +106,25 @@ export default function Card({
 
   const onCardClick = (e: React.MouseEvent) => {
     if(onClick) onClick();
-    if (videos && videos.length > 0) {
+    // Only expand on click for mobile
+    if (isMobile && videos && videos.length > 0) {
       setIsExpanded(!isExpanded);
+    }
+  };
+
+  const handleMouseEnter = () => {
+    // Only expand on hover for desktop
+    if (!isMobile && videos && videos.length > 0) {
+      setIsHovering(true);
+      setIsExpanded(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    // Only collapse on hover leave for desktop
+    if (!isMobile) {
+      setIsHovering(false);
+      setIsExpanded(false);
     }
   };
 
@@ -98,6 +132,8 @@ export default function Card({
     <motion.div
       layout
       onClick={onCardClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       whileHover={{ y: -12, scale:1.02 }}
       whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -145,7 +181,30 @@ export default function Card({
             className="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-linear-to-br from-[#3b82f6] to-[#2563eb] text-white rounded-xl hover:shadow-lg transition-all duration-300 font-medium"
           >
             <Download className="w-5 h-5" />
-            {t.button}
+            {pdfs.button}
+          </motion.button>
+        )}
+
+        {/* Mobile "See Videos/Notes" Button */}
+        {isMobile && videos && videos.length > 0 && !isExpanded && (
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsExpanded(true);
+            }}
+            className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 font-medium"
+          >
+            <Video className="w-5 h-5" />
+            <span>See Videos/Notes</span>
+            <motion.div
+              animate={{ y: [0, 3, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <ChevronDown className="w-5 h-5" />
+            </motion.div>
           </motion.button>
         )}
 
@@ -160,7 +219,7 @@ export default function Card({
             >
               <div className="pt-2 space-y-2 border-t border-gray-100 mt-2">
                   <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                    {t.videosHeading || "Related Video Lessons"}
+                    {pdfs.videosHeading || "Related Video Lessons"}
                   </p>
                   {videos.map((video, index) => (
                     <Link
@@ -180,7 +239,7 @@ export default function Card({
                       <div className="p-1.5 bg-blue-600 rounded-md">
                         <Video className="w-4 h-4 text-white" />
                       </div>
-                      <span className="font-medium text-sm truncate">{t.videosLabel[video.label] || video.label}</span>
+                      <span className="font-medium text-sm truncate">{pdfs.videosLabel?.[video.label] || video.label}</span>
                     </motion.div>
                     </Link>
                   ))}

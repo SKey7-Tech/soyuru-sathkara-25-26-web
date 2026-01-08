@@ -1,10 +1,11 @@
 'use client';
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, FileText, BookOpen, StickyNote } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export function Hero() {
   const { language } = useLanguage();
@@ -13,14 +14,15 @@ export function Hero() {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1654366698665-e6d611a9aaa9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdHVkZW50cyUyMGxlYXJuaW5nJTIwY2xhc3Nyb29tfGVufDF8fHx8MTc2NDY5NzA3OXww&ixlib=rb-4.1.0&q=80&w=1080)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
+      <div className="absolute inset-0 z-0">
+        <ImageWithFallback
+          src="/hero/ssHero.jpg"
+          alt="Students learning in classroom"
+          fetchPriority="high"
+          className="w-full h-full object-cover"
+          width={1920}
+          height={1080}
+        />
         <div className="absolute inset-0 bg-gradient-to-br from-[#1d1e22]/95 via-[#393f4d]/90 to-[#1d1e22]/95"></div>
       </div>
 
@@ -75,29 +77,55 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/resources" className="inline-block">
+          {/* Three Resource Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+            <Link href="/resources/papers">
               <motion.div
-                whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)" }}
+                whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-[#1d1e22] px-8 py-4 rounded-lg hover:bg-white/90 transition-all shadow-lg flex items-center gap-2 group"
+                className="bg-gradient-to-r from-purple-500 to-purple-600 text-white px-6 py-4 rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all shadow-lg hover:shadow-purple-500/50 flex items-center gap-3 group min-w-[200px] justify-center"
               >
-                {t.exploreBtn}
-                <motion.div
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <ArrowRight className="w-5 h-5" />
-                </motion.div>
+                <FileText className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                <span className="font-medium">{t.papersBtn}</span>
               </motion.div>
             </Link>
-            <motion.button
+            
+            <Link href="/resources/theory">
+              <motion.div
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-4 rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-blue-500/50 flex items-center gap-3 group min-w-[200px] justify-center"
+              >
+                <BookOpen className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                <span className="font-medium">{t.theoryBtn}</span>
+              </motion.div>
+            </Link>
+            
+            <Link href="/resources/short-notes">
+              <motion.div
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-4 rounded-xl hover:from-green-600 hover:to-green-700 transition-all shadow-lg hover:shadow-green-500/50 flex items-center gap-3 group min-w-[200px] justify-center"
+              >
+                <StickyNote className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                <span className="font-medium">{t.shortNotesBtn}</span>
+              </motion.div>
+            </Link>
+          </div>
+
+          {/* Learn More Button */}
+          <div className="flex items-center justify-center">
+            <motion.a
+              href="https://efsu-uom.lk/about"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-[#3b82f6] text-white px-8 py-4 rounded-lg hover:bg-[#2563eb] transition-colors border border-[#3b82f6]"
+              className="bg-white/10 backdrop-blur-sm text-white px-8 py-3 rounded-lg hover:bg-white/20 transition-all border border-white/30 inline-flex items-center gap-2"
             >
               {t.learnMoreBtn}
-            </motion.button>
+              <ArrowRight className="w-4 h-4" />
+            </motion.a>
           </div>
         </motion.div>
       </div>
