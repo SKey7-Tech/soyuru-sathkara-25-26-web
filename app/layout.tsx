@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   keywords: ["GCE O/L", "Sri Lanka", "education", "learning resources", "papers", "video lectures", "theory notes", "uom", "University of Moratuwa"],
   authors: [{ name: "Soyuru Sathkara", url: "https://ss.efsu-uom.lk" }],
   publisher: "Soyuru Sathkara",
+  icons: {
+    icon: "/favicon/favicon.ico",
+  },
   alternates: {
     canonical: "https://ss.efsu-uom.lk",
     languages: {
