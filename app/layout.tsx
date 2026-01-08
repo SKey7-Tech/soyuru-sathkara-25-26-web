@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Soyuru Sathkara", url: "https://ss.efsu-uom.lk" }],
   publisher: "Soyuru Sathkara",
   icons: {
-    icon: "/favicon/favicon.ico",
+    icon: "/favicon.ico",
   },
   alternates: {
     canonical: "https://ss.efsu-uom.lk",

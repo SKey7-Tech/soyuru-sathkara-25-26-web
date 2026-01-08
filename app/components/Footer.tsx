@@ -97,7 +97,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#3b82f6] flex-shrink-0 mt-1" />
-                <span className="text-white/80">Colombo, Sri Lanka</span>
+                <span className="text-white/80">Katubedda, Colombo.</span>
               </li>
             </ul>
           </div>
