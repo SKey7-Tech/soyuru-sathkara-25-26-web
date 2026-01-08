@@ -7,24 +7,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
         {
             url: baseUrl,
             lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 1.0,
         },
         {
-            url: `${baseUrl}/en`,
+            url: `${baseUrl}/resources/papers`,
             lastModified: new Date(),
-            changeFrequency: 'monthly',
-
         },
         {
-            url: `${baseUrl}/si`,
+            url: `${baseUrl}/resources/short-notes`,
             lastModified: new Date(),
-            changeFrequency: 'monthly',
         },
         {
-            url: `${baseUrl}/ta`,
+            url: `${baseUrl}/resources/theory`,
             lastModified: new Date(),
-            changeFrequency: 'monthly',
         },
         // add the rest of the routes here - SEO important pages
     ]
