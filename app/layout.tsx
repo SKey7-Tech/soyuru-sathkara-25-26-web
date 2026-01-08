@@ -97,6 +97,10 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <meta  // DO NOT REMOVE THIS META TAG - used for Google site verification
+          name="google-site-verification"
+          content="9EUahB8BFitoixEHT86h4aRgoLqtOUtyhhgfYBW2cm4"
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
