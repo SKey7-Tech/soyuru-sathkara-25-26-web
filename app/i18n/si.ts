@@ -53,6 +53,10 @@ export const si = {
         title: "පහසු මට්ටමේ ප්‍රශ්න පත්‍රය",
         description: "පහසු මට්ටමේ පුහුණු ප්‍රශ්න සහ අභ්‍යාස"
       },
+      "Easy-Level-Tamil": {
+        title: "පහසු මට්ටමේ ප්‍රශ්න පත්‍රය (දෙමළ මාධ්‍ය)",
+        description: "දෙමළ මාධ්‍යය තුළ පහසු මට්ටමේ පුහුණු ප්‍රශ්න සහ අභ්‍යාස"
+      },
       "Medium-Level": {
         title: "මධ්‍යම මට්ටමේ ප්‍රශ්න පත්‍රය",
         description: "මධ්‍යම මට්ටමේ පුහුණු ප්‍රශ්න සහ අභ්‍යාස"
@@ -114,7 +118,21 @@ export const si = {
       "discussion_4": "සාකච්ඡාව 04",
       "discussion_5": "සාකච්ඡාව 05",
       "discussion_6": "සාකච්ඡාව 06",
-      "discussion_7": "සාකච්ඡාව 07"
+      "discussion_7": "සාකච්ඡාව 07",
+      "discussion_8": "සාකච්ඡාව 08",
+      "discussion_9": "සාකච්ඡාව 09",
+      "discussion_10": "සාකච්ඡාව 10",
+      "discussion_11": "සාකච්ඡාව 11",
+      "discussion_12": "සාකච්ඡාව 12",
+      "discussion_13": "සාකච්ඡාව 13",
+      "discussion_14": "සාකච්ඡාව 14",
+      "discussion_15": "සාකච්ඡාව 15",
+      "discussion_16": "සාකච්ඡාව 16",
+      "discussion_17": "සාකච්ඡාව 17",
+      "discussion_18": "සාකච්ඡාව 18",
+      "discussion_19": "සාකච්ඡාව 19",
+      "discussion_20": "සාකච්ඡාව 20",
+      "discussion_21": "සාකච්ඡාව 21"
     },
     items: {
       "handbook-2025": {

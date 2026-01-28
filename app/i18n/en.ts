@@ -57,6 +57,10 @@ export const en = {
         title: "Easy Level Paper",
         description: "Easy level practice questions and exercises"
       },
+      "Easy-Level-Tamil": {
+        title: "Easy Level Paper (Tamil Medium)",
+        description: "Easy level practice questions and exercises in Tamil medium"
+      },
       "Medium-Level": {
         title: "Medium Level Paper",
         description: "Medium level practice questions and exercises"
@@ -132,7 +136,21 @@ export const en = {
       "discussion_4": "Discussion Part 4",
       "discussion_5": "Discussion Part 5",
       "discussion_6": "Discussion Part 6",
-      "discussion_7": "Discussion Part 7"
+      "discussion_7": "Discussion Part 7",
+      "discussion_8": "Discussion Part 8",
+      "discussion_9": "Discussion Part 9",
+      "discussion_10": "Discussion Part 10",
+      "discussion_11": "Discussion Part 11",
+      "discussion_12": "Discussion Part 12",
+      "discussion_13": "Discussion Part 13",
+      "discussion_14": "Discussion Part 14",
+      "discussion_15": "Discussion Part 15",
+      "discussion_16": "Discussion Part 16",
+      "discussion_17": "Discussion Part 17",
+      "discussion_18": "Discussion Part 18",
+      "discussion_19": "Discussion Part 19",
+      "discussion_20": "Discussion Part 20",
+      "discussion_21": "Discussion Part 21"
     },
     items: {
       "handbook-2025": {
