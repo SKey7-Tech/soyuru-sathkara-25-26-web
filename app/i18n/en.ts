@@ -65,6 +65,10 @@ export const en = {
         title: "Medium Level Paper",
         description: "Medium level practice questions and exercises"
       },
+      "Medium-Level-Tamil": {
+        title: "Medium Level Paper (Tamil Medium)",
+        description: "Medium level practice questions and exercises in Tamil medium"
+      },
       "Hard-Level": {
         title: "Hard Level Paper",
         description: "Hard level practice questions and exercises"

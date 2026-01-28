@@ -40,7 +40,7 @@ export const papers: Paper[] = [
     id: "Easy-Level-Tamil",
     titleKey: "Easy-Level-Tamil",
     descriptionKey: "Easy-Level-Tamil",
-    filePath: "/files/papers/Easy-Level.pdf",
+    filePath: "/files/papers/Easy-paper-tamil.pdf",
     coverImage: "/gallery/paper-cover.jpeg",
     videos: [
       { label: "discussion_1", url: "https://www.youtube.com/watch?v=E-dC-0GiMw8" },
@@ -63,7 +63,7 @@ export const papers: Paper[] = [
     id: "Medium-Level",
     titleKey: "Medium-Level",
     descriptionKey: "Medium-Level",
-    filePath: "/files/papers/Medium-Level.pdf",
+    filePath: "/files/papers/Medium-level.pdf",
     coverImage: "/gallery/paper-cover.jpeg",
     videos: [
       { label: "discussion_1", url:"https://www.youtube.com/watch?v=0cL-ZvTdGH8" },
@@ -86,6 +86,20 @@ export const papers: Paper[] = [
       { label: "discussion_18", url: "https://www.youtube.com/watch?v=F7LdCeJ7hHg" },
       { label: "discussion_19", url: "https://www.youtube.com/watch?v=QEn05THsecY" },
       { label: "discussion_20", url: "https://www.youtube.com/watch?v=zBWMJDzRlz8" },
+    ],
+  },
+  {
+    id: "Medium-Level-Tamil",
+    titleKey: "Medium-Level-Tamil",
+    descriptionKey: "Medium-Level-Tamil",
+    filePath: "/files/papers/Medium_paper_tamil.pdf",
+    coverImage: "/gallery/paper-cover.jpeg",
+    videos: [
+      // { label: "discussion_1", url: "" },
+      // { label: "discussion_2", url: "" },
+      // { label: "discussion_3", url: "" },
+      // { label: "discussion_4", url: "" },
+      // { label: "discussion_5", url: "" },
     ],
   },
   {
