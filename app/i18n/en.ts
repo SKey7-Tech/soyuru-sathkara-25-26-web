@@ -133,6 +133,7 @@ export const en = {
     subtitle: "Download important documents and study materials",
     button: "Download",
     videosHeading: "Related Video Lessons",
+    expandD: "See Videos",
     videosLabel : {
       "discussion_1": "Discussion Part 1",
       "discussion_2": "Discussion Part 2",

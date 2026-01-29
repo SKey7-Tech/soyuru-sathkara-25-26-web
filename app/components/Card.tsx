@@ -198,7 +198,7 @@ export default function Card({
             className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 font-medium"
           >
             <Video className="w-5 h-5" />
-            <span>See Videos/Notes</span>
+            <span>{pdfs.expandD}</span> 
             <motion.div
               animate={{ y: [0, 3, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}

@@ -115,6 +115,7 @@ export const si = {
     subtitle: "වැදගත් ලේඛන සහ අධ්‍යයන ද්‍රව්‍ය බාගන්න",
     button: "බාගන්න",
     videosHeading: "සම්බන්ධිත වීඩියෝ පාඩම්",
+    expandD: "වීඩියෝ බලන්න",
     videosLabel : {
       "discussion_1": "සාකච්ඡාව 01",
       "discussion_2": "සාකච්ඡාව 02",
@@ -150,7 +151,7 @@ export const si = {
       "prospectus": {
         title: "පාසල් ප්‍රස්පෙක්ටස්",
         description: "වැඩසටහන්, පහසුකම් සහ ඇතුළත් ගැනීමේ විස්තර පිළිබඳ දළ විශ්ලේෂණය"
-      }
+      },
     }
   },
   footer: {
