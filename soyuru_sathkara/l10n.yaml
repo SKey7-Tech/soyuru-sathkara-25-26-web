@@ -1,0 +1,21 @@
+# SHARED — frozen after Phase 0.
+#
+# ARB files live in l10n/ at the project root (not lib/l10n/) so the content
+# team can find and edit them without going near Dart source.
+#
+# Regenerate after editing an .arb:  flutter gen-l10n
+# (A normal `flutter run` also regenerates, because pubspec has generate: true.)
+arb-dir: l10n
+template-arb-file: app_en.arb
+output-dir: lib/l10n
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+
+# Non-nullable getter: AppLocalizations.of(context) returns AppLocalizations
+# rather than AppLocalizations?, so screens are not littered with `!`.
+nullable-getter: false
+
+# Warn loudly when app_si.arb or app_ta.arb is missing a key that app_en.arb
+# has. Untranslated strings fall back to English silently otherwise, and a
+# half-Sinhala screen is the kind of bug nobody notices until a student does.
+untranslated-messages-file: l10n/untranslated.json
