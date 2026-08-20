@@ -20,6 +20,7 @@ export function Navbar() {
 
   const t = translations[language];
 
+
   // Function to handle smooth scroll without changing URL
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     // Check if it's a regular route (not a hash link)
@@ -197,6 +198,10 @@ export function Navbar() {
     { code: "si" as const, name: "සිං", fullName: "සිංහල" },
     { code: "ta" as const, name: "த", fullName: "தமிழ்" }
   ];
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
 
   return (
     <>
