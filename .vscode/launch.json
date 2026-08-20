@@ -1,0 +1,28 @@
+{
+  // The Supabase publishable key is bundled in lib/core/env.dart, so no
+  // --dart-define is needed to run against the live project.
+  //
+  // Do NOT add "--dart-define=SUPABASE_ANON_KEY=${env:SUPABASE_ANON_KEY}" here:
+  // if that environment variable is unset, VS Code passes an EMPTY value, which
+  // overrides the bundled key with nothing and the app boots to the config
+  // error screen. Only pass the define with a literal key, and only when
+  // targeting a different project.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Soyuru Sathkara (debug)",
+      "request": "launch",
+      "type": "dart",
+      "program": "soyuru_sathkara/lib/main.dart",
+      "cwd": "soyuru_sathkara"
+    },
+    {
+      "name": "Soyuru Sathkara (release)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "program": "soyuru_sathkara/lib/main.dart",
+      "cwd": "soyuru_sathkara"
+    }
+  ]
+}
