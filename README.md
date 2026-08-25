@@ -1,64 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Soyuru Sathkara
 
-## Getting Started
+Free, trilingual (Sinhala / English / Tamil) learning resources for Sri Lankan
+G.C.E. students — video lessons, past and model papers, theory and short notes.
+Built by the EFSU team at the University of Moratuwa.
 
-First, run the development server:
+**Live site:** https://ss.efsu-uom.lk
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## What is in this repository
+
+| Piece | Path | Stack |
+| --- | --- | --- |
+| Public website | [`app/`](app/) | Next.js 16 (App Router), React 19, Tailwind 4 |
+| Admin panel | [`app/admin/`](app/admin/) | Next.js Server Actions + Supabase service role |
+| Mobile app | [`soyuru_sathkara/`](soyuru_sathkara/) | Flutter, Riverpod, go_router |
+| Backend | [`supabase/`](supabase/) | Postgres + RLS + Storage — no custom server |
+
+There is no application server. Postgres *is* the backend, shared by the website
+and the app, and the RLS policies in
+[`supabase/migrations/002_rls_policies.sql`](supabase/migrations/002_rls_policies.sql)
+are the only thing protecting the data.
+
+## Documentation
+
+Everything lives in [`docs/`](docs/):
+
+| Document | Covers |
+| --- | --- |
+| [docs/README.md](docs/README.md) | Start here — index and one-paragraph overview |
+| [docs/architecture.md](docs/architecture.md) | How the pieces fit together, data flow, trust model |
+| [docs/setup.md](docs/setup.md) | Running the website, app and database locally |
+| [docs/database.md](docs/database.md) | Tables, RLS, Storage, seed data |
+| [docs/web-app.md](docs/web-app.md) | Routes, components, i18n, SEO |
+| [docs/admin-panel.md](docs/admin-panel.md) | Content upload flows |
+| [docs/mobile-app.md](docs/mobile-app.md) | Flutter screens, repositories, offline behaviour |
+| [docs/known-issues.md](docs/known-issues.md) | **Read before running** — what is broken today |
+
+## Quick start
+
+> The web app does **not** build from a clean clone — `app/utils/supabase/` is
+> missing. See [issue 1](docs/known-issues.md) for exactly what to recreate.
+
+```powershell
+# 1. Backend — run the migrations in supabase/ (see docs/setup.md)
+
+# 2. Website
+npm install
+npm run dev            # http://localhost:3000
+
+# 3. Mobile app
+cd soyuru_sathkara
+flutter pub get
+flutter run
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`.env.local` for the website:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```ini
+NEXT_PUBLIC_SUPABASE_URL=https://atvpbxxzpnhjtsuuzmfu.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_...
+SUPABASE_SERVICE_ROLE_KEY=<service_role key>    # server-only, bypasses RLS
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script | Does |
+| --- | --- |
+| `npm run dev` | Dev server |
+| `npm run build` / `npm run start` | Production build / serve |
+| `npm run lint` | ESLint |
+| `npm run analyze` | Bundle analysis |
 
-## Learn More
+## Contributing rules
 
-To learn more about Next.js, take a look at the following resources:
+**Every string needs three translations.** Add each new piece of UI text to
+`app/i18n/en.ts`, `si.ts` **and** `ta.ts`. A missing key renders `undefined`, not
+a fallback. For the Flutter app the equivalent files are
+`soyuru_sathkara/l10n/app_{en,si,ta}.arb`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**SEO** — add new public routes to [`app/sitemap.ts`](app/sitemap.ts), and keep
+the domain consistent across `app/layout.tsx`, `app/sitemap.ts` and
+`public/robots.txt`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Never commit the service_role key.** It bypasses RLS entirely. It belongs in
+`.env.local`, in Vercel's environment settings, and in your shell for the length
+of `node scripts/upload_pdfs.mjs` — nowhere else. The publishable/anon key is
+safe to commit and is deliberately bundled in the Flutter app.
 
-## Deploy on Vercel
+**Flutter code ownership** — the app has a per-developer ownership split; see
+[`soyuru_sathkara/README.md`](soyuru_sathkara/README.md) before editing inside
+someone else's `features/` folder.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Open work
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## installing dependancies
-npm install lucide-react framer-motion
-
-## MultiLanguage Translations
-You will hv to add the en, si, ta versions of every text you write into "i18n/ en.ts, si.ts and ta.ts"
-
-## SEO
-Add the rest of the SEO important pages into sitemap, 
-Create and add an OGimage to layout.tsx/metadata,
-Check the domain is correct or not on layout.tsx, robots.txt
-
-##  Work In Progress (TODO)
-
-### Pending Pages
-The following navigation links are placeholders (hash links) pending implementation by other team members:
-
-- **Resources**
-  - [ ] Past Papers (`#papers` → `/resources/papers`)
-  - [ ] Short Notes (`#shortnotes` → `/resources/short-notes`)
-  - [ ] Theory Notes (`#theorynotes` → `/resources/theory-notes`)
-  
-- **Other Pages**
-  - [ ] About Us (`#about` → `/about`)
-  - [ ] Contact (`#contact` → `/contact`)
-
-**Action Required:** Update `app/components/Navbar.tsx` and `app/components/Footer.tsx` 
-when these pages are implemented.
+Tracked in [docs/known-issues.md](docs/known-issues.md). The headline items:
+restore `app/utils/supabase/`, put an auth guard in front of `/admin`,
+distinguish short notes from theory notes in the schema, and finish the SEO
+setup (OG image, sitemap coverage, one canonical domain).
