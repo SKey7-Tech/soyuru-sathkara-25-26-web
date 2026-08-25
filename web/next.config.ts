@@ -29,7 +29,15 @@ const nextConfig: NextConfig = {
   // Enable experimental features for better performance
   experimental: {
     optimizePackageImports: ['framer-motion', 'lucide-react'],
-    optimizeCss: true,
+
+    // optimizeCss is OFF on purpose. It inlines critical CSS via `critters`,
+    // which is not a Next.js dependency and is not installed — with it on,
+    // every render throws "Cannot find module 'critters'", including the
+    // error page itself, so a real error shows up as an unrelated 500.
+    //
+    // To re-enable: `npm i -D critters` (or its maintained successor,
+    // `beasties`) and set optimizeCss: true. Measure first — Turbopack
+    // already handles CSS well and the win is usually small.
   },
 
   // Optimize compiler
