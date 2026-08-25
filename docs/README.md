@@ -23,6 +23,7 @@ The repository holds **three products that share one backend**:
 | 5 | [admin-panel.md](admin-panel.md) | Content upload flows and their server actions |
 | 6 | [mobile-app.md](mobile-app.md) | Flutter screens, repositories, models, offline behaviour |
 | 7 | [known-issues.md](known-issues.md) | **Read before running** — what is broken or missing today |
+| 8 | [roadmap.md](roadmap.md) | What to build next, and what was deferred on purpose |
 
 ## The one-paragraph version
 

@@ -34,7 +34,7 @@ Any `/admin/*` request without a session redirects to `/admin/login`, carrying
 `/admin`. Refreshed auth cookies are copied onto both redirects — dropping them
 silently signs the user out on the next request.
 
-**Layer 2 — the route group** ([`web/app/admin/(panel)/layout.tsx`](../web/app/admin/(panel)/layout.tsx)).
+**Layer 2 — the route group** ([`web/app/admin/(panel)/layout.tsx`](<../web/app/admin/(panel)/layout.tsx>)).
 Being signed in is not the same as being an admin. The layout queries the
 `admins` table through the **cookie-bound** client, so the `admins read own`
 policy (`auth.uid() = id`) does the enforcing — a non-admin's query returns no

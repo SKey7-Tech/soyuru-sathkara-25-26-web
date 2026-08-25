@@ -80,6 +80,23 @@ with `now()` — **never trust a phone's clock** for "last watched".
 
 PK `(user_id, paper_id)`, plus `downloaded_at`.
 
+### `admins` — who may use the admin panel
+
+⚠ **Not in any migration.** Created through the dashboard; see
+[known-issues.md](known-issues.md) issue 12.
+
+| Column | Type | Notes |
+| --- | --- | --- |
+| `id` | uuid PK → `auth.users` | |
+| `email` | text NOT NULL | |
+| `created_at` | timestamptz | default `now()` |
+
+Policy `admins read own` — `for select using (auth.uid() = id)`. That policy is
+what makes the admin guard safe: the panel's layout looks the caller up with the
+**cookie-bound** client, so a non-admin's query returns no row regardless of
+what they send. Membership is granted by inserting a row, not by a flag on
+`profiles`.
+
 ### Indexes
 
 ```

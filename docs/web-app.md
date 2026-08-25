@@ -159,12 +159,25 @@ variants so motion stays consistent:
 
 ## Middleware
 
-[`web/middleware.ts`](../web/middleware.ts) delegates to `updateSession` from
-`web/app/utils/supabase/middleware`, which refreshes the Supabase auth cookie on
-every request. The matcher skips `_next/static`, `_next/image`, `favicon.ico`
-and image extensions.
+[`web/middleware.ts`](../web/middleware.ts) delegates to `updateSession` in
+[`web/app/utils/supabase/middleware.ts`](../web/app/utils/supabase/middleware.ts),
+which refreshes the Supabase auth cookie on every request **and gates `/admin`**.
+The matcher skips `_next/static`, `_next/image`, `favicon.ico` and image
+extensions.
 
-It does **not** currently gate `/admin` — see [known-issues.md](known-issues.md).
+Two rules from the `@supabase/ssr` contract that are easy to break, both noted
+in the file:
+
+1. Put no code between `createServerClient()` and `getUser()` — a slow or
+   throwing call in between can log users out at random, because the refresh
+   never completes.
+2. Return the response object, or copy its cookies onto any redirect you build.
+   The refreshed cookies live on it; dropping them signs the user out on the
+   next request.
+
+Next 16 deprecates the `middleware` file convention in favour of `proxy`
+(`npx @next/codemod@canary middleware-to-proxy .`). It still works, and the
+build only warns — see [roadmap.md](roadmap.md).
 
 ## Build configuration
 

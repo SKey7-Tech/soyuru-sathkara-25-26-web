@@ -1,8 +1,8 @@
 # Setup & running
 
-> Before you start, read [known-issues.md](known-issues.md). The web app does
-> **not** currently build from a clean clone — `web/app/utils/supabase/` is missing
-> and has to be recreated. That file explains exactly what to write.
+> The web app builds and runs from a clean clone. The one thing it cannot supply
+> for you is the **service_role key** — paste it into `web/.env.local` before
+> using `/admin`. See [known-issues.md](known-issues.md) for what is still open.
 
 ## Prerequisites
 
@@ -142,9 +142,10 @@ web/                     Next.js — public website + admin panel
     data/                Legacy hard-coded content — source of the seed
     i18n/                en.ts / si.ts / ta.ts translation dictionaries
     resources/           Public /resources/* pages
-    utils/               animations.ts (+ the missing supabase/ helpers)
+    utils/               animations.ts, supabase/ (client/server/admin/proxy)
   public/                Static assets, PDFs, gallery images, robots.txt
-  middleware.ts          Supabase session refresh
+  middleware.ts          Session refresh + /admin gate
+  .env.local             Gitignored. Service_role key goes here
   package.json           All npm scripts live here — run them from web/
   next.config.ts  tsconfig.json  postcss.config.mjs  eslint.config.mjs
 

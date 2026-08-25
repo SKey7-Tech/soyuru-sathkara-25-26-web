@@ -43,11 +43,12 @@ Everything lives in [`docs/`](docs/):
 | [docs/admin-panel.md](docs/admin-panel.md) | Content upload flows |
 | [docs/mobile-app.md](docs/mobile-app.md) | Flutter screens, repositories, offline behaviour |
 | [docs/known-issues.md](docs/known-issues.md) | **Read before running** — what is broken today |
+| [docs/roadmap.md](docs/roadmap.md) | What to build next, and what was deferred on purpose |
 
 ## Quick start
 
-> The web app does **not** build from a clean clone — `web/app/utils/supabase/` is
-> missing. See [issue 1](docs/known-issues.md) for exactly what to recreate.
+> `web/.env.local` already has the URL and publishable key. Paste your
+> **service_role key** into it before using `/admin`.
 
 ```powershell
 # 1. Backend — run the migrations in supabase/ (see docs/setup.md)
@@ -102,7 +103,9 @@ someone else's `features/` folder.
 
 ## Open work
 
-Tracked in [docs/known-issues.md](docs/known-issues.md). The headline items:
-restore `web/app/utils/supabase/`, put an auth guard in front of `/admin`,
-distinguish short notes from theory notes in the schema, and finish the SEO
-setup (OG image, sitemap coverage, one canonical domain).
+Two documents:
+
+- [docs/known-issues.md](docs/known-issues.md) — defects and gaps in what exists.
+  The headline item: **no PDFs are uploaded**, so every download 404s.
+- [docs/roadmap.md](docs/roadmap.md) — what to build next, and what was
+  deliberately deferred.

@@ -3,34 +3,81 @@
 Lives at `/admin`, inside the same Next.js app. It is the only way content
 reaches the database outside of the SQL seed.
 
-> ⚠ **The panel is currently unprotected.** `web/app/admin/layout.tsx` renders its
-> children with no session check, and `web/middleware.ts` refreshes the auth cookie
-> without redirecting unauthenticated users away from `/admin`. Anyone who knows
-> the URL can upload and delete content. See [known-issues.md](known-issues.md)
-> for the fix.
+## Access control
+
+Two independent checks, because the panel runs under the service_role key and an
+unauthenticated request reaching it can upload and delete content.
+
+**Layer 1 — the proxy.** [`web/app/utils/supabase/middleware.ts`](../web/app/utils/supabase/middleware.ts)
+redirects any `/admin/*` request without a session to `/admin/login`, carrying
+`?redirectedFrom=`. A signed-in user who lands on the login page is sent on to
+`/admin`. Refreshed auth cookies are copied onto both redirects — dropping them
+would silently sign the user out on the next request.
+
+**Layer 2 — the layout.** Being signed in is not the same as being an admin.
+[`web/app/admin/(panel)/layout.tsx`](<../web/app/admin/(panel)/layout.tsx>) queries the
+`admins` table using the **cookie-bound** client, so the `admins read own` policy
+(`auth.uid() = id`) does the enforcing: a non-admin's query returns no row no
+matter what they send. No row redirects to `/`.
+
+### Why the route group
+
+The login page lives at `app/admin/login/`, *outside* the `(panel)` group. If it
+sat inside the guarded layout, an unauthenticated visit would redirect to a page
+that redirects again, forever.
+
+Route groups do not affect URLs — `/admin/papers` is still `/admin/papers`.
+`actions.ts` sits inside the group too, which keeps the `from '../actions'`
+imports in the pages valid.
+
+```
+app/admin/
+├── login/            ← NOT guarded (page.tsx, actions.ts)
+└── (panel)/          ← guarded by layout.tsx
+    ├── layout.tsx    sidebar + requireAdmin()
+    ├── page.tsx      dashboard
+    ├── actions.ts    uploadPaper, uploadVideo, deleteVideo
+    ├── papers/
+    └── videos/
+```
+
+Admin accounts are ordinary Supabase Auth users **plus** a row in `admins`.
+Create the user in the Dashboard under Authentication → Users, then insert the
+matching row. Note `admins` is not yet in any migration — see
+[known-issues.md](known-issues.md) issue 12.
 
 ## Pages
 
 | Route | File | Rendering |
 | --- | --- | --- |
-| `/admin` | [app/admin/page.tsx](../web/app/admin/page.tsx) | Static dashboard with two links |
-| `/admin/papers` | [app/admin/papers/page.tsx](../web/app/admin/papers/page.tsx) | Server — upload form + list of all papers |
-| `/admin/videos` | [app/admin/videos/page.tsx](../web/app/admin/videos/page.tsx) | Server — add form + 50 most recent videos |
-| `/admin/login` | [app/admin/login/page.tsx](../web/app/admin/login/page.tsx) | Email + password sign-in |
+| `/admin` | [(panel)/page.tsx](<../web/app/admin/(panel)/page.tsx>) | Dynamic — dashboard with two links |
+| `/admin/papers` | [(panel)/papers/page.tsx](<../web/app/admin/(panel)/papers/page.tsx>) | Dynamic — upload form + list of all papers |
+| `/admin/videos` | [(panel)/videos/page.tsx](<../web/app/admin/(panel)/videos/page.tsx>) | Dynamic — add form + 50 most recent videos |
+| `/admin/login` | [login/page.tsx](../web/app/admin/login/page.tsx) | Static — email + password sign-in |
 
-[`web/app/admin/layout.tsx`](../web/app/admin/layout.tsx) provides the sidebar shell
+The three panel routes are dynamic rather than static because the guard calls
+`cookies()`, which opts them out of static generation. That is also why a
+production build succeeds with an empty `SUPABASE_SERVICE_ROLE_KEY` — they are
+never prerendered.
+
+[`(panel)/layout.tsx`](<../web/app/admin/(panel)/layout.tsx>) provides the sidebar shell
 (Dashboard / Papers & PDFs / YouTube Videos / Back to Site). Note it sits *inside*
 the root layout, so the public `Navbar` and `Footer` also render on admin pages.
 
 ## Supabase clients
 
-Three different clients, used deliberately:
+Three clients plus a shared env reader, used deliberately:
 
 | Helper | Used by | Key |
 | --- | --- | --- |
-| `createClient()` from `web/app/utils/supabase/client` | Public `/resources/*` pages (browser) | anon |
-| `createClient()` from `web/app/utils/supabase/server` | `login` server action | anon, cookie-bound |
-| `createAdminClient()` from `web/app/utils/supabase/admin` | Admin pages and content server actions | **service_role** |
+| [`client.ts`](../web/app/utils/supabase/client.ts) | Public `/resources/*` pages (browser) | anon |
+| [`server.ts`](../web/app/utils/supabase/server.ts) | `login` action, the admin guard | anon, cookie-bound — RLS applies |
+| [`admin.ts`](../web/app/utils/supabase/admin.ts) | Admin pages and content actions | **service_role** — RLS bypassed |
+| [`env.ts`](../web/app/utils/supabase/env.ts) | All three | — reads the vars, naming any that is missing |
+
+Picking the wrong one is the easy mistake here. The guard deliberately uses the
+**cookie-bound** client, not the service_role one: with service_role, RLS is
+bypassed and the `admins` lookup would succeed for anybody.
 
 `createAdminClient()` bypasses RLS. It must only ever be called from server
 components and server actions — never imported into a `"use client"` file, or
@@ -38,7 +85,7 @@ the key ends up in the browser bundle.
 
 ## Server actions
 
-All in [`web/app/admin/actions.ts`](../web/app/admin/actions.ts) (`'use server'`).
+All in [`(panel)/actions.ts`](<../web/app/admin/(panel)/actions.ts>) (`'use server'`).
 
 ### `uploadPaper(formData)`
 
@@ -71,7 +118,7 @@ paper's card, on both the website and the app.
 ### `deleteVideo(formData)`
 
 Takes `id`, deletes from `videos`, revalidates. Invoked from
-[`DeleteVideoButton`](../web/app/admin/videos/DeleteVideoButton.tsx), a small client
+[`DeleteVideoButton`](<../web/app/admin/(panel)/videos/DeleteVideoButton.tsx>), a small client
 component that wraps the action in a form with a confirmation.
 
 There is no delete action for papers, and no edit action for either — the panel
