@@ -5,65 +5,49 @@ severity.
 
 ---
 
-## 1. 🔴 `web/app/utils/supabase/` is missing — the web app does not build
+## 1. ✅ FIXED — `web/app/utils/supabase/` now exists
 
-Eight files import from it; the directory does not exist on disk and is not
-tracked by git (`git ls-files app/utils` returns only `animations.ts`).
+Five files, written against `@supabase/ssr` 0.12.4 / `supabase-js` 2.112.3:
 
-| Importer | Needs |
+| File | Role |
 | --- | --- |
-| [middleware.ts:2](../web/middleware.ts#L2) | `updateSession` from `web/app/utils/supabase/middleware` |
-| [app/admin/actions.ts:4](../web/app/admin/actions.ts#L4) | `createAdminClient` from `web/app/utils/supabase/admin` |
-| [app/admin/papers/page.tsx:1](../web/app/admin/papers/page.tsx#L1) | `createAdminClient` |
-| [app/admin/videos/page.tsx:1](../web/app/admin/videos/page.tsx#L1) | `createAdminClient` |
-| [app/admin/login/actions.ts:5](../web/app/admin/login/actions.ts#L5) | `createClient` from `web/app/utils/supabase/server` |
-| [app/resources/papers/page.tsx:9](../web/app/resources/papers/page.tsx#L9) | `createClient` from `web/app/utils/supabase/client` |
-| [app/resources/short-notes/page.tsx:9](../web/app/resources/short-notes/page.tsx#L9) | `createClient` |
-| [app/resources/theory/page.tsx:9](../web/app/resources/theory/page.tsx#L9) | `createClient` |
+| [`env.ts`](../web/app/utils/supabase/env.ts) | Reads the three env vars, throwing a pointed error naming the missing one rather than failing deep inside the SDK |
+| [`client.ts`](../web/app/utils/supabase/client.ts) | `createBrowserClient` — the `/resources/*` pages |
+| [`server.ts`](../web/app/utils/supabase/server.ts) | `createServerClient` bound to `cookies()` — acts as the signed-in user, RLS applies |
+| [`admin.ts`](../web/app/utils/supabase/admin.ts) | service_role client, RLS bypassed. Throws if called in a browser |
+| [`middleware.ts`](../web/app/utils/supabase/middleware.ts) | `updateSession` — session refresh plus the `/admin` gate |
 
-`@supabase/ssr` and `@supabase/supabase-js` are already in `web/package.json`, so
-only the four helper files are missing. They follow the standard `@supabase/ssr`
-Next.js pattern:
-
-- **`client.ts`** — `createBrowserClient(NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY)`.
-- **`server.ts`** — `async createClient()` using `createServerClient` with
-  `cookies()` from `next/headers` (`getAll` / `setAll`, with the `setAll`
-  `try/catch` for Server Components).
-- **`web/middleware.ts`** — `updateSession(request)`: build a `NextResponse`, create
-  a server client wired to the request/response cookies, call
-  `supabase.auth.getUser()` to refresh the session, return the response. This is
-  also the right place to add the admin guard (issue 2).
-- **`admin.ts`** — `createClient` from `@supabase/supabase-js` with
-  `SUPABASE_SERVICE_ROLE_KEY` and `auth: { autoRefreshToken: false, persistSession: false }`.
-  Server-only; never import it from a `"use client"` file.
-
-Environment variables required (see [setup.md](setup.md)):
-`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`,
-`SUPABASE_SERVICE_ROLE_KEY`.
+`web/.env.local` was created with the project URL and publishable key (both
+already public — the same key ships inside the Flutter app). **You must paste
+the service_role key into it** before the admin pages work; it is blank.
 
 ---
 
-## 2. 🔴 `/admin` has no authentication guard
+## 2. ✅ FIXED — `/admin` is guarded, in two layers
 
-[`web/app/admin/layout.tsx`](../web/app/admin/layout.tsx) renders its children with no
-session check, and `web/middleware.ts` refreshes the auth cookie without redirecting
-anyone. A login page exists and works, but nothing requires you to use it —
-anyone who knows the URL reaches the upload and delete forms, which run under
-the **service_role** key.
+The panel was reachable by URL alone while running under the service_role key.
+Now:
 
-Two things to add:
+**Layer 1 — the proxy** ([`web/app/utils/supabase/middleware.ts`](../web/app/utils/supabase/middleware.ts)).
+Any `/admin/*` request without a session redirects to `/admin/login`, carrying
+`?redirectedFrom=`. A signed-in user landing on the login page is bounced to
+`/admin`. Refreshed auth cookies are copied onto both redirects — dropping them
+silently signs the user out on the next request.
 
-- In `updateSession`, redirect to `/admin/login` when the path starts with
-  `/admin` (excluding `/admin/login`) and `supabase.auth.getUser()` returns no
-  user.
-- A defence-in-depth check in `web/app/admin/layout.tsx` itself, since middleware
-  can be misconfigured.
+**Layer 2 — the route group** ([`web/app/admin/(panel)/layout.tsx`](../web/app/admin/(panel)/layout.tsx)).
+Being signed in is not the same as being an admin. The layout queries the
+`admins` table through the **cookie-bound** client, so the `admins read own`
+policy (`auth.uid() = id`) does the enforcing — a non-admin's query returns no
+row regardless of what they send. No row means a redirect to `/`.
 
-There is also no notion of an admin *role* — any Supabase Auth user in the
-project can sign in. Consider a `profiles.is_admin` column or a dedicated
-`admins` table, checked in the layout.
+The panel moved into an `app/admin/(panel)/` route group so the login page sits
+*outside* the guarded layout; inside it, an unauthenticated visit would redirect
+to a page that redirects again, forever. Route groups do not affect URLs —
+`/admin/papers` is still `/admin/papers`. `actions.ts` moved into the group too,
+keeping the `from '../actions'` imports valid.
 
-`web/public/robots.txt` disallows `/api/` but not `/admin`.
+Note `admins` is **not in any migration** — it was created through the dashboard.
+See issue 12.
 
 ---
 
@@ -180,7 +164,77 @@ Carried over from [`supabase/README.md`](../supabase/README.md):
 
 ---
 
-## 11. 🟢 Smaller notes
+## 11. 🔴 No PDFs are uploaded to Storage — every download 404s
+
+Confirmed live via the Supabase MCP server. All six `papers` rows carry a
+`storage_path`; the `resources` bucket contains **zero objects**.
+
+```
+papers/Easy-Level.pdf            6.7 MB   missing
+papers/Easy-paper-tamil.pdf      754 KB   missing
+papers/Hard-Level.pdf            8.4 MB   missing
+papers/Medium_paper_tamil.pdf    459 KB   missing
+papers/Medium-Level.pdf          8.6 MB   missing
+short-notes/Short-Note.pdf       8.2 MB   missing
+```
+
+Everything else in the backend is provisioned: all 7 tables, all 9 RLS
+policies, the profile trigger, and the bucket itself (public, 50 MB,
+`application/pdf`). The seed ran correctly — `subjects 1 · units 3 · papers 6 ·
+videos 53`, exactly the documented expectation.
+
+Fix — from the **repo root**, not `web/`:
+
+```powershell
+$env:SUPABASE_URL = "https://atvpbxxzpnhjtsuuzmfu.supabase.co"
+$env:SUPABASE_SERVICE_ROLE_KEY = "<service_role key>"
+node scripts/upload_pdfs.mjs
+```
+
+The script verifies each file's size against `size_bytes` in the seed before
+uploading; all six currently match.
+
+> The stale "tables not created" table in [`supabase/README.md`](../supabase/README.md)
+> predates the admin panel and is wrong. It should be deleted.
+
+---
+
+## 12. 🟠 Schema drift — `admins` exists in the database but in no migration
+
+The `admins` table was created through the dashboard and is not in
+`supabase/migrations/`:
+
+```sql
+admins ( id uuid not null references auth.users,
+         email text not null,
+         created_at timestamptz default now() )
+policy "admins read own"  for select using (auth.uid() = id)
+```
+
+One row, matching the single auth user. The admin guard added in issue 2 depends
+on it, so it needs to be written into a migration —
+`supabase/migrations/005_admins.sql` — or a fresh environment will provision a
+database the app cannot authenticate against.
+
+Related: `list_migrations` returns empty, because every migration was pasted
+into the SQL Editor rather than applied through the CLI. That is the documented
+workflow, but it means no drift detection — which is exactly how this table
+slipped in unrecorded.
+
+Also worth fixing while you are there, from `get_advisors`:
+
+- `touch_updated_at` has a mutable `search_path` (001 sets it on
+  `handle_new_user` but not on this one).
+- `handle_new_user()` is `SECURITY DEFINER` and callable by `anon` and
+  `authenticated` via `/rest/v1/rpc/handle_new_user`. Low exploitability — it is
+  a trigger function and errors on `new` outside a trigger — but
+  `revoke execute … from anon, authenticated` is the right hygiene.
+- Leaked-password protection is disabled in Auth settings. Worth enabling, since
+  admin login is email + password.
+
+---
+
+## 13. 🟢 Smaller notes
 
 - **Tamil terminology** — the website renders "discussion" as **சர்ச்சை**
   (*controversy*). The Flutter app corrected this to **கலந்துரையாடல்**; the
