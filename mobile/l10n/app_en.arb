@@ -1,0 +1,144 @@
+{
+  "@@locale": "en",
+  "@@comment": "SHARED — template file. Add a key here first, then to app_si.arb and app_ta.arb. A key missing from si/ta silently falls back to English, so `flutter gen-l10n` warnings are worth reading.",
+
+  "appTitle": "Soyuru Sathkara",
+  "appTagline": "Education Beyond Boundaries",
+
+  "navHome": "Home",
+  "navPapers": "Papers",
+  "navProfile": "Profile",
+
+  "homeSubtitle": "Free video lessons, papers and notes",
+  "homeSubjects": "Subjects",
+  "homeContinueWatching": "Continue watching",
+
+  "subjectTabVideos": "Videos",
+  "subjectTabPapers": "Papers",
+
+  "unitsTitle": "Lesson units",
+  "unitVideoCount": "{count, plural, =0{No videos} =1{1 video} other{{count} videos}}",
+  "@unitVideoCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "unitCompletedOf": "{done} of {total} watched",
+  "@unitCompletedOf": {
+    "placeholders": {
+      "done": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+
+  "playerUpNext": "Up next",
+  "playerRelatedVideos": "Related video lessons",
+  "playerMarkComplete": "Mark as watched",
+  "playerMarkedComplete": "Watched",
+  "playerOpenInYouTube": "Open in YouTube",
+  "playerVideoOf": "Video {index} of {total}",
+  "@playerVideoOf": {
+    "placeholders": {
+      "index": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "playerNext": "Next",
+  "playerPrevious": "Previous",
+  "playerProgressSaved": "Progress saved",
+
+  "papersSubtitle": "Download exam papers and practice questions",
+  "filterAll": "All",
+  "filterYear": "Year",
+  "filterMedium": "Medium",
+  "filterType": "Type",
+  "filterClear": "Clear filters",
+
+  "paperTypePast": "Past paper",
+  "paperTypeModel": "Practice paper",
+  "paperTypeTerm": "Term test",
+  "paperTypeNotes": "Notes",
+
+  "mediumSi": "Sinhala",
+  "mediumEn": "English",
+  "mediumTa": "Tamil",
+
+  "paperWithAnswers": "With answers",
+  "paperSeeVideos": "See videos",
+  "paperDiscussionCount": "{count, plural, =0{No discussions} =1{1 discussion} other{{count} discussions}}",
+  "@paperDiscussionCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "actionDownload": "Download",
+  "actionOpen": "Open",
+  "actionDownloadAgain": "Download again",
+  "downloadProgress": "Downloading… {percent}%",
+  "@downloadProgress": {
+    "placeholders": { "percent": { "type": "int" } }
+  },
+  "downloadStarting": "Starting download…",
+  "downloadComplete": "Downloaded",
+  "downloadFailed": "Download failed",
+  "downloadNeedsConnection": "You need an internet connection to download this paper.",
+
+  "pdfPageOf": "Page {page} of {total}",
+  "@pdfPageOf": {
+    "placeholders": {
+      "page": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "pdfOpenFailed": "This PDF could not be opened. It may not have finished downloading.",
+
+  "profileTitle": "Profile",
+  "profileStudent": "Student",
+  "profileGuest": "Guest",
+  "profileGuestExplainer": "You are browsing as a guest. Your progress is saved on this phone only — sign in to keep it if you change phones.",
+  "profileSignedInAs": "Signed in as {email}",
+  "@profileSignedInAs": {
+    "placeholders": { "email": { "type": "String" } }
+  },
+  "profileDisplayName": "Display name",
+  "profileLanguage": "Language",
+  "profileMyDownloads": "My downloads",
+  "profileSignOut": "Sign out",
+  "profileSignOutConfirm": "Sign out of this account? Guest progress on this phone is kept.",
+  "profileSaved": "Saved",
+
+  "authSignIn": "Sign in",
+  "authSignUp": "Create account",
+  "authEmail": "Email",
+  "authPassword": "Password",
+  "authNoAccount": "No account yet?",
+  "authHaveAccount": "Already have an account?",
+  "authContinueAsGuest": "Continue as guest",
+  "authWhySignIn": "Signing in keeps your watch progress and downloads if you change phones. It is optional.",
+  "authInvalidEmail": "Enter a valid email address",
+  "authPasswordTooShort": "Password must be at least 6 characters",
+  "authCheckEmail": "Check your email to confirm your account.",
+
+  "downloadsTitle": "My downloads",
+  "downloadsEmptyTitle": "No downloads yet",
+  "downloadsEmptyMessage": "Papers you download appear here so you can read them without internet.",
+  "downloadsOnThisPhone": "Saved on this phone",
+  "downloadsNotOnThisPhone": "Not on this phone",
+  "downloadsRemove": "Remove from phone",
+  "downloadsRemoved": "Removed from this phone",
+
+  "emptyNoSubjectsTitle": "No subjects yet",
+  "emptyNoSubjectsMessage": "Study material has not been published yet. Please check back soon.",
+  "emptyNoVideosTitle": "No videos yet",
+  "emptyNoVideosMessage": "Discussion videos for this paper have not been published yet.",
+  "emptyNoPapersTitle": "No papers found",
+  "emptyNoPapersMessage": "No papers match these filters.",
+  "emptyNoProgressMessage": "Videos you start watching will appear here.",
+
+  "commonRetry": "Retry",
+  "commonCancel": "Cancel",
+  "commonClose": "Close",
+  "commonSave": "Save",
+  "commonOk": "OK",
+
+  "errorGeneric": "Something went wrong",
+  "errorNoConnection": "No internet connection",
+  "errorConfigMissingTitle": "App not configured"
+}

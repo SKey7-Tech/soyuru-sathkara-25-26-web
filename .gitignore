@@ -1,20 +1,22 @@
-node_modules
+# Dependencies
+node_modules/
 
-# Next.js build output
+# Next.js build output (web/)
+web/.next/
+web/out/
 .next/
 out/
 
-# Local environment files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Local environment files — never commit keys
+.env
+.env.*
+!.env.example
 
 # Debug and log files
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
 pnpm-debug.log*
+yarn-error.log*
 
 # Miscellaneous system files
 .DS_Store
@@ -25,3 +27,9 @@ Thumbs.db
 .vercel
 *.tsbuildinfo
 coverage/
+
+# Database dumps
+database_dump.sql
+
+# Flutter build artifacts are handled by mobile/.gitignore.
+# Do NOT ignore mobile/, supabase/ or scripts/ here — all three are tracked.
