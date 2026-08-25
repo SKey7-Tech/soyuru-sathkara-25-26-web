@@ -10,10 +10,19 @@ Built by the EFSU team at the University of Moratuwa.
 
 | Piece | Path | Stack |
 | --- | --- | --- |
-| Public website | [`app/`](app/) | Next.js 16 (App Router), React 19, Tailwind 4 |
-| Admin panel | [`app/admin/`](app/admin/) | Next.js Server Actions + Supabase service role |
-| Mobile app | [`soyuru_sathkara/`](soyuru_sathkara/) | Flutter, Riverpod, go_router |
+| Public website | [`web/`](web/) | Next.js 16 (App Router), React 19, Tailwind 4 |
+| Admin panel | [`web/app/admin/`](web/app/admin/) | Next.js Server Actions + Supabase service role |
+| Mobile app | [`mobile/`](mobile/) | Flutter, Riverpod, go_router |
 | Backend | [`supabase/`](supabase/) | Postgres + RLS + Storage — no custom server |
+| Shared tooling | [`scripts/`](scripts/) | One-off PDF uploader (service_role, zero deps) |
+
+```
+web/        Next.js site + admin      →  npm commands run from here
+mobile/     Flutter app               →  flutter commands run from here
+supabase/   Shared backend            →  migrations + seed, paste into SQL Editor
+scripts/    Shared tooling            →  run from the repo root
+docs/       Documentation
+```
 
 There is no application server. Postgres *is* the backend, shared by the website
 and the app, and the RLS policies in
@@ -37,29 +46,32 @@ Everything lives in [`docs/`](docs/):
 
 ## Quick start
 
-> The web app does **not** build from a clean clone — `app/utils/supabase/` is
+> The web app does **not** build from a clean clone — `web/app/utils/supabase/` is
 > missing. See [issue 1](docs/known-issues.md) for exactly what to recreate.
 
 ```powershell
 # 1. Backend — run the migrations in supabase/ (see docs/setup.md)
 
 # 2. Website
+cd web
 npm install
 npm run dev            # http://localhost:3000
 
 # 3. Mobile app
-cd soyuru_sathkara
+cd ../mobile
 flutter pub get
 flutter run
 ```
 
-`.env.local` for the website:
+`web/.env.local` — note it lives in `web/`, not at the repo root:
 
 ```ini
 NEXT_PUBLIC_SUPABASE_URL=https://atvpbxxzpnhjtsuuzmfu.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_...
 SUPABASE_SERVICE_ROLE_KEY=<service_role key>    # server-only, bypasses RLS
 ```
+
+Scripts, all run from `web/`:
 
 | Script | Does |
 | --- | --- |
@@ -71,13 +83,13 @@ SUPABASE_SERVICE_ROLE_KEY=<service_role key>    # server-only, bypasses RLS
 ## Contributing rules
 
 **Every string needs three translations.** Add each new piece of UI text to
-`app/i18n/en.ts`, `si.ts` **and** `ta.ts`. A missing key renders `undefined`, not
+`web/app/i18n/en.ts`, `si.ts` **and** `ta.ts`. A missing key renders `undefined`, not
 a fallback. For the Flutter app the equivalent files are
-`soyuru_sathkara/l10n/app_{en,si,ta}.arb`.
+`mobile/l10n/app_{en,si,ta}.arb`.
 
-**SEO** — add new public routes to [`app/sitemap.ts`](app/sitemap.ts), and keep
-the domain consistent across `app/layout.tsx`, `app/sitemap.ts` and
-`public/robots.txt`.
+**SEO** — add new public routes to [`web/app/sitemap.ts`](web/app/sitemap.ts), and keep
+the domain consistent across `web/app/layout.tsx`, `web/app/sitemap.ts` and
+`web/public/robots.txt`.
 
 **Never commit the service_role key.** It bypasses RLS entirely. It belongs in
 `.env.local`, in Vercel's environment settings, and in your shell for the length
@@ -85,12 +97,12 @@ of `node scripts/upload_pdfs.mjs` — nowhere else. The publishable/anon key is
 safe to commit and is deliberately bundled in the Flutter app.
 
 **Flutter code ownership** — the app has a per-developer ownership split; see
-[`soyuru_sathkara/README.md`](soyuru_sathkara/README.md) before editing inside
+[`mobile/README.md`](mobile/README.md) before editing inside
 someone else's `features/` folder.
 
 ## Open work
 
 Tracked in [docs/known-issues.md](docs/known-issues.md). The headline items:
-restore `app/utils/supabase/`, put an auth guard in front of `/admin`,
+restore `web/app/utils/supabase/`, put an auth guard in front of `/admin`,
 distinguish short notes from theory notes in the schema, and finish the SEO
 setup (OG image, sitemap coverage, one canonical domain).

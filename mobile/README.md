@@ -77,7 +77,7 @@ without touching Dart. `flutter gen-l10n` regenerates `lib/l10n/` (a normal
 `flutter run` does it too).
 
 Strings that also exist on the website were copied verbatim from
-`app/i18n/{si,ta}.ts` so both products read the same. Everything else was
+`web/app/i18n/{si,ta}.ts` so both products read the same. Everything else was
 written for the app and is flagged in each ARB header as **needing a
 native-speaker review before release** (plan Step 5).
 

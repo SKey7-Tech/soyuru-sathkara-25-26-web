@@ -83,14 +83,14 @@ the logcat for `AuthService` if progress is not sticking.
 
 Nothing here is invented. It was extracted from the live website:
 
-- **53 YouTube video IDs** — `app/data/papers.ts`
-- **Trilingual titles** — `app/i18n/{en,si,ta}.ts`
-- **PDF filenames and byte sizes** — `public/files/**`
+- **53 YouTube video IDs** — `web/app/data/papers.ts`
+- **Trilingual titles** — `web/app/i18n/{en,si,ta}.ts`
+- **PDF filenames and byte sizes** — `web/public/files/**`
 
 ## Known gaps in the content
 
-- **Theory notes are not seeded.** The website lists three (`app/data/theory.ts`)
-  but `public/files/theory/` does not exist and their video IDs are all the same
+- **Theory notes are not seeded.** The website lists three (`web/app/data/theory.ts`)
+  but `web/public/files/theory/` does not exist and their video IDs are all the same
   placeholder. The rows are written out, commented, at the bottom of the seed —
   uncomment once real PDFs exist.
 - **`prospectus.pdf`, `annual-report-2024.pdf`, `student-handbook-2025.pdf`** are

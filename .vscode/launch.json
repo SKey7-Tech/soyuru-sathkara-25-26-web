@@ -13,16 +13,16 @@
       "name": "Soyuru Sathkara (debug)",
       "request": "launch",
       "type": "dart",
-      "program": "soyuru_sathkara/lib/main.dart",
-      "cwd": "soyuru_sathkara"
+      "program": "mobile/lib/main.dart",
+      "cwd": "mobile"
     },
     {
       "name": "Soyuru Sathkara (release)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release",
-      "program": "soyuru_sathkara/lib/main.dart",
-      "cwd": "soyuru_sathkara"
+      "program": "mobile/lib/main.dart",
+      "cwd": "mobile"
     }
   ]
 }

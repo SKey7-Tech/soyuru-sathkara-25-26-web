@@ -136,7 +136,7 @@ Folder convention: `papers/`, `short-notes/`, `theory/`.
 **Why public rather than signed URLs** (the plan originally said signed):
 
 1. The content is already public — these exact PDFs are served today from the
-   website's `/public/files/` with no auth. A signed URL protects nothing.
+   website's `web/public/files/` with no auth. A signed URL protects nothing.
 2. The app must work on slow/no network. A public URL is computed offline by the
    SDK with zero round trips and is CDN-cached. A signed URL costs an extra
    network call *before* the download starts, and expires — the wrong failure
@@ -162,9 +162,9 @@ website:
 
 | Seeded | Source |
 | --- | --- |
-| 53 YouTube video IDs | `app/data/papers.ts` |
-| Trilingual titles | `app/i18n/{en,si,ta}.ts` |
-| PDF filenames and byte sizes | `public/files/**` |
+| 53 YouTube video IDs | `web/app/data/papers.ts` |
+| Trilingual titles | `web/app/i18n/{en,si,ta}.ts` |
+| PDF filenames and byte sizes | `web/public/files/**` |
 
 Result: `subjects 1 | units 3 | papers 6 | videos 53`. Fixed UUIDs plus
 `on conflict` make it re-runnable.
@@ -182,7 +182,7 @@ Result: `subjects 1 | units 3 | papers 6 | videos 53`. Fixed UUIDs plus
 ### Known content gaps
 
 - **Theory notes are not seeded.** The website lists three
-  (`app/data/theory.ts`) but `public/files/theory/` does not exist and their
+  (`web/app/data/theory.ts`) but `web/public/files/theory/` does not exist and their
   video IDs are all the same placeholder. The rows sit commented at the bottom
   of the seed; uncomment once real PDFs exist. Each needs its own subject row
   too, since they are Biology / Physics / Chemistry rather than Mathematics.

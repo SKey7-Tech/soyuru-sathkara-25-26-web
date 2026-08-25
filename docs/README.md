@@ -7,9 +7,9 @@ The repository holds **three products that share one backend**:
 
 | Product | Path | Stack |
 | --- | --- | --- |
-| Public website | [`app/`](../app/) | Next.js 16 (App Router), React 19, Tailwind 4 |
-| Admin panel | [`app/admin/`](../app/admin/) | Next.js Server Actions + Supabase service role |
-| Mobile app | [`soyuru_sathkara/`](../soyuru_sathkara/) | Flutter 3.13+, Riverpod, go_router |
+| Public website | [`web/app/`](../web/app/) | Next.js 16 (App Router), React 19, Tailwind 4 |
+| Admin panel | [`web/app/admin/`](../web/app/admin/) | Next.js Server Actions + Supabase service role |
+| Mobile app | [`mobile/`](../mobile/) | Flutter 3.13+, Riverpod, go_router |
 | Backend | [`supabase/`](../supabase/) | Postgres + RLS + Storage (no custom server) |
 
 ## Read in this order

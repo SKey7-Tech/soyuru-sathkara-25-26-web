@@ -7,14 +7,14 @@ TypeScript `strict`, path alias `@/*` → repo root.
 
 | Route | File | Rendering | Notes |
 | --- | --- | --- | --- |
-| `/` | [app/page.tsx](../app/page.tsx) | Server | Landing page; emits `EducationalOrganization` JSON-LD |
-| `/resources/papers` | [app/resources/papers/page.tsx](../app/resources/papers/page.tsx) | Client | Queries `papers` where `paper_type in ('model','past','term')` |
-| `/resources/short-notes` | [app/resources/short-notes/page.tsx](../app/resources/short-notes/page.tsx) | Client | Queries `papers` where `paper_type = 'notes'` |
-| `/resources/theory` | [app/resources/theory/page.tsx](../app/resources/theory/page.tsx) | Client | Queries `papers` where `paper_type = 'notes'` |
-| `/admin/*` | [app/admin/](../app/admin/) | Server | See [admin-panel.md](admin-panel.md) |
-| `/sitemap.xml` | [app/sitemap.ts](../app/sitemap.ts) | Generated | Add new SEO-relevant routes here |
+| `/` | [app/page.tsx](../web/app/page.tsx) | Server | Landing page; emits `EducationalOrganization` JSON-LD |
+| `/resources/papers` | [app/resources/papers/page.tsx](../web/app/resources/papers/page.tsx) | Client | Queries `papers` where `paper_type in ('model','past','term')` |
+| `/resources/short-notes` | [app/resources/short-notes/page.tsx](../web/app/resources/short-notes/page.tsx) | Client | Queries `papers` where `paper_type = 'notes'` |
+| `/resources/theory` | [app/resources/theory/page.tsx](../web/app/resources/theory/page.tsx) | Client | Queries `papers` where `paper_type = 'notes'` |
+| `/admin/*` | [app/admin/](../web/app/admin/) | Server | See [admin-panel.md](admin-panel.md) |
+| `/sitemap.xml` | [app/sitemap.ts](../web/app/sitemap.ts) | Generated | Add new SEO-relevant routes here |
 
-`app/resources/page-old.tsx` is a retired pre-Supabase version kept for
+`web/app/resources/page-old.tsx` is a retired pre-Supabase version kept for
 reference. It is not routable (`page-old` is not a Next.js route file name).
 
 > The three resource pages issue the *same* query for short notes and theory —
@@ -23,7 +23,7 @@ reference. It is not routable (`page-old` is not a Next.js route file name).
 
 ## Layout and providers
 
-[`app/layout.tsx`](../app/layout.tsx) is the single root layout for the whole
+[`web/app/layout.tsx`](../web/app/layout.tsx) is the single root layout for the whole
 site, admin included. It:
 
 - loads Geist Sans + Geist Mono via `next/font` with `display: swap`,
@@ -60,7 +60,7 @@ app/i18n/en.ts  si.ts  ta.ts       the dictionaries
 **Rule:** every string you add needs an `en`, `si` and `ta` entry. A missing key
 renders `undefined`, not a fallback.
 
-Dictionary shape (see `app/i18n/en.ts`):
+Dictionary shape (see `web/app/i18n/en.ts`):
 
 ```
 hero, quickLinks, gallery, introVideo, schoolsOutreach,
@@ -68,12 +68,12 @@ papers { title, description, linkTitle, items: { <id>: { title, description } } 
 theory, shortNotes, pdfs { button, expandD, videosHeading, videosLabel }, footer, nav
 ```
 
-`items` is keyed by the resource `id` from `app/data/*.ts`, which is how
+`items` is keyed by the resource `id` from `web/app/data/*.ts`, which is how
 `Card`'s `titleKey` / `descriptionKey` props resolve.
 
 ## Components
 
-All in [`app/components/`](../app/components/).
+All in [`web/app/components/`](../web/app/components/).
 
 | Component | Type | Purpose |
 | --- | --- | --- |
@@ -81,9 +81,9 @@ All in [`app/components/`](../app/components/).
 | `Footer` | client | Site links, Facebook + YouTube, trilingual labels |
 | `Hero` | client | Landing hero with CTA buttons into the three resource pages |
 | `QuickLinks` | client | Primary resource cards + secondary links (About/Contact point at `efsu-uom.lk`) |
-| `Gallery` | client | Photo grid from `public/gallery/` |
+| `Gallery` | client | Photo grid from `web/public/gallery/` |
 | `IntroVideo` | client | Embedded introduction video |
-| `SchoolsOutreach` | client | School-partnership section — **currently commented out** of `app/page.tsx` |
+| `SchoolsOutreach` | client | School-partnership section — **currently commented out** of `web/app/page.tsx` |
 | `Card` | client | The workhorse — see below |
 | `ErrorBoundary` | client class | Catches render errors per section; logs only in development; shows a refresh prompt |
 | `LoadingSkeletons` | client | `QuickLinksSkeleton`, `GallerySkeleton`, `IntroVideoSkeleton`, `SchoolsOutreachSkeleton` for `<Suspense>` fallbacks |
@@ -94,7 +94,7 @@ so one failing section cannot blank the page.
 
 ### `Card`
 
-[`app/components/Card.tsx`](../app/components/Card.tsx) renders every resource
+[`web/app/components/Card.tsx`](../web/app/components/Card.tsx) renders every resource
 tile. Props:
 
 | Prop | Purpose |
@@ -124,14 +124,14 @@ Behaviour:
 
 Two generations coexist:
 
-**Legacy — hard-coded** ([`app/data/`](../app/data/)): `papers.ts`,
+**Legacy — hard-coded** ([`web/app/data/`](../web/app/data/)): `papers.ts`,
 `shortNotes.ts`, `theory.ts`, `pdfs.ts`. Each exports an array of
 `{ id, titleKey, descriptionKey, filePath, coverImage, videos[] }` pointing at
-files in `public/files/`. These were the source the Supabase seed was built
-from, and `app/i18n/en.ts` still imports `papers` and `theory`.
+files in `web/public/files/`. These were the source the Supabase seed was built
+from, and `web/app/i18n/en.ts` still imports `papers` and `theory`.
 
 **Current — Supabase**: the `/resources/*` pages create a browser client
-(`createClient()` from `app/utils/supabase/client`), query `papers` with a
+(`createClient()` from `web/app/utils/supabase/client`), query `papers` with a
 nested `videos(title, youtube_video_id)` join, resolve the download URL with
 `supabase.storage.from('resources').getPublicUrl(storage_path)`, and pick the
 title by language with a fallback to `title`:
@@ -146,7 +146,7 @@ Each page renders a spinner while loading and a "No papers found." empty state.
 
 ## Animations
 
-[`app/utils/animations.ts`](../app/utils/animations.ts) centralises Framer Motion
+[`web/app/utils/animations.ts`](../web/app/utils/animations.ts) centralises Framer Motion
 variants so motion stays consistent:
 
 | Export | Contents |
@@ -159,8 +159,8 @@ variants so motion stays consistent:
 
 ## Middleware
 
-[`middleware.ts`](../middleware.ts) delegates to `updateSession` from
-`app/utils/supabase/middleware`, which refreshes the Supabase auth cookie on
+[`web/middleware.ts`](../web/middleware.ts) delegates to `updateSession` from
+`web/app/utils/supabase/middleware`, which refreshes the Supabase auth cookie on
 every request. The matcher skips `_next/static`, `_next/image`, `favicon.ico`
 and image extensions.
 
@@ -168,7 +168,7 @@ It does **not** currently gate `/admin` — see [known-issues.md](known-issues.m
 
 ## Build configuration
 
-[`next.config.ts`](../next.config.ts):
+[`web/next.config.ts`](../web/next.config.ts):
 
 - **Images** — AVIF + WebP output, explicit `deviceSizes` / `imageSizes`, remote
   pattern allowing `images.unsplash.com`.
@@ -184,8 +184,8 @@ It does **not** currently gate `/admin` — see [known-issues.md](known-issues.m
 ## SEO checklist
 
 Currently handled: metadata and OG/Twitter tags in `layout.tsx`, JSON-LD
-`EducationalOrganization` on the home page, `app/sitemap.ts`,
-`public/robots.txt`, hreflang alternates, Google verification token.
+`EducationalOrganization` on the home page, `web/app/sitemap.ts`,
+`web/public/robots.txt`, hreflang alternates, Google verification token.
 
 Still open: create and wire an OG image, add remaining routes to the sitemap,
 and confirm the domain is consistent everywhere (`layout.tsx`, `sitemap.ts`,

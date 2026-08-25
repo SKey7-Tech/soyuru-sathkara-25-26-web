@@ -17,13 +17,13 @@
         │                    │      RLS)    │
  ┌──────┴───────┐   ┌────────┴───────┐  ┌───┴──────────────────┐
  │  Public web  │   │  Admin panel   │  │ scripts/upload_pdfs  │
- │  app/        │   │  app/admin/    │  │ (one-off, from shell)│
+ │  web/app/    │   │  web/app/admin/│  │ (one-off, from shell)│
  └──────────────┘   └────────────────┘  └──────────────────────┘
         ▲
         │ publishable key
  ┌──────┴───────┐
  │ Flutter app  │
- │ soyuru_...   │
+ │  mobile/     │
  └──────────────┘
 
         YouTube ──► video playback (the DB stores only the 11-char video ID)
@@ -88,10 +88,10 @@ one product.
 ## Historical note: the website predates the database
 
 The website originally shipped its content as hard-coded TypeScript arrays in
-[`app/data/`](../app/data/) with PDFs served straight out of `public/files/`.
+[`web/app/data/`](../web/app/data/) with PDFs served straight out of `web/public/files/`.
 The Supabase schema was then seeded *from* those files — all 53 YouTube IDs came
-out of `app/data/papers.ts`, and all trilingual titles out of `app/i18n/`.
+out of `web/app/data/papers.ts`, and all trilingual titles out of `web/app/i18n/`.
 
 The `/resources/*` pages have since been migrated to query Supabase, but the
-`app/data/*.ts` files still exist and are still imported by `app/i18n/en.ts`.
+`web/app/data/*.ts` files still exist and are still imported by `web/app/i18n/en.ts`.
 See [known-issues.md](known-issues.md).

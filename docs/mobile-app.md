@@ -1,9 +1,9 @@
 # Mobile app (Flutter)
 
-Lives in [`soyuru_sathkara/`](../soyuru_sathkara/). Trilingual, offline-tolerant,
+Lives in [`mobile/`](../mobile/). Trilingual, offline-tolerant,
 talks to the same Supabase project as the website.
 
-Its own [README](../soyuru_sathkara/README.md) carries the team-ownership rules;
+Its own [README](../mobile/README.md) carries the team-ownership rules;
 this document covers how the code is put together.
 
 ## Stack
@@ -21,7 +21,7 @@ this document covers how the code is put together.
 
 ## Startup sequence
 
-[`lib/main.dart`](../soyuru_sathkara/lib/main.dart), in order:
+[`lib/main.dart`](../mobile/lib/main.dart), in order:
 
 1. `Env.isConfigured` check — if the key resolved to an empty string, run
    `ConfigErrorApp` with an explanation instead of crashing deep inside the SDK.
@@ -33,14 +33,14 @@ this document covers how the code is put together.
 5. `authService.ensureSession()` — anonymous sign-in. Never throws.
 6. `runApp(UncontrolledProviderScope(...))`.
 
-[`lib/app.dart`](../soyuru_sathkara/lib/app.dart) builds `MaterialApp.router`.
+[`lib/app.dart`](../mobile/lib/app.dart) builds `MaterialApp.router`.
 The `GoRouter` is a `late final` field, **not** built in `build()` — rebuilding
 it would reset the navigation stack. `themeMode` is `system`, matching the
 website's `prefers-color-scheme` behaviour.
 
 ## Routing
 
-[`lib/router.dart`](../soyuru_sathkara/lib/router.dart). Route names are
+[`lib/router.dart`](../mobile/lib/router.dart). Route names are
 constants on `Routes`, used with `pushNamed`/`goNamed` so no screen builds a
 path string by hand.
 
@@ -150,7 +150,7 @@ and the available filter values from it.
 
 ## Auth
 
-[`lib/services/auth_service.dart`](../soyuru_sathkara/lib/services/auth_service.dart).
+[`lib/services/auth_service.dart`](../mobile/lib/services/auth_service.dart).
 
 - **`ensureSession()`** — signs in anonymously if there is no session. Never
   rethrows: everything except progress tracking works without one. On failure it
@@ -184,14 +184,14 @@ generation into `lib/l10n/`; `flutter gen-l10n` regenerates, and a normal
 `flutter run` does it too. Never edit `lib/l10n/*.dart`.
 
 Strings that also exist on the website were copied verbatim from
-`app/i18n/{si,ta}.ts` so both products read the same. Everything else is flagged
+`web/app/i18n/{si,ta}.ts` so both products read the same. Everything else is flagged
 in each ARB header as needing a native-speaker review before release.
 
 One correction was made rather than copied: the website renders "discussion" in
 Tamil as **சர்ச்சை**, which means *controversy*. The app uses
 **கலந்துரையாடல்**. The website still has the wrong word.
 
-**Current language** — [`LocaleController`](../soyuru_sathkara/lib/core/locale_controller.dart),
+**Current language** — [`LocaleController`](../mobile/lib/core/locale_controller.dart),
 stored in two places on purpose:
 
 | Store | Why |
@@ -210,7 +210,7 @@ swallows its error — a failed sync must not undo a change already on screen.
 
 ## PDF caching
 
-[`PdfCacheService`](../soyuru_sathkara/lib/features/pdf_viewer/pdf_cache_service.dart).
+[`PdfCacheService`](../mobile/lib/features/pdf_viewer/pdf_cache_service.dart).
 
 - Files go in the **application support** directory, not the cache directory:
   Android may delete the cache dir under storage pressure, and a paper downloaded

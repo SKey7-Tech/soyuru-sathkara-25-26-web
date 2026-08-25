@@ -35,12 +35,12 @@ const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
  * seededBytes -> the size_bytes value in the seed script, verified before upload
  */
 const FILES = [
-  { localPath: 'public/files/papers/Easy-Level.pdf',        storagePath: 'papers/Easy-Level.pdf',        seededBytes: 6680967 },
-  { localPath: 'public/files/papers/Easy-paper-tamil.pdf',  storagePath: 'papers/Easy-paper-tamil.pdf',  seededBytes: 753803 },
-  { localPath: 'public/files/papers/Medium-Level.pdf',      storagePath: 'papers/Medium-Level.pdf',      seededBytes: 8593020 },
-  { localPath: 'public/files/papers/Medium_paper_tamil.pdf', storagePath: 'papers/Medium_paper_tamil.pdf', seededBytes: 458626 },
-  { localPath: 'public/files/papers/Hard-Level.pdf',        storagePath: 'papers/Hard-Level.pdf',        seededBytes: 8433517 },
-  { localPath: 'public/files/short-notes/Short-Note.pdf',   storagePath: 'short-notes/Short-Note.pdf',   seededBytes: 8173217 },
+  { localPath: 'web/public/files/papers/Easy-Level.pdf',        storagePath: 'papers/Easy-Level.pdf',        seededBytes: 6680967 },
+  { localPath: 'web/public/files/papers/Easy-paper-tamil.pdf',  storagePath: 'papers/Easy-paper-tamil.pdf',  seededBytes: 753803 },
+  { localPath: 'web/public/files/papers/Medium-Level.pdf',      storagePath: 'papers/Medium-Level.pdf',      seededBytes: 8593020 },
+  { localPath: 'web/public/files/papers/Medium_paper_tamil.pdf', storagePath: 'papers/Medium_paper_tamil.pdf', seededBytes: 458626 },
+  { localPath: 'web/public/files/papers/Hard-Level.pdf',        storagePath: 'papers/Hard-Level.pdf',        seededBytes: 8433517 },
+  { localPath: 'web/public/files/short-notes/Short-Note.pdf',   storagePath: 'short-notes/Short-Note.pdf',   seededBytes: 8173217 },
 ];
 
 function die(msg) {

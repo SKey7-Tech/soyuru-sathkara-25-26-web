@@ -1,7 +1,7 @@
 # Setup & running
 
 > Before you start, read [known-issues.md](known-issues.md). The web app does
-> **not** currently build from a clean clone — `app/utils/supabase/` is missing
+> **not** currently build from a clean clone — `web/app/utils/supabase/` is missing
 > and has to be recreated. That file explains exactly what to write.
 
 ## Prerequisites
@@ -53,11 +53,12 @@ signup wall. If it stays off, browsing works but nothing saves — silently.
 ## 2. Website
 
 ```powershell
+cd web
 npm install
 npm run dev          # http://localhost:3000
 ```
 
-Create `.env.local` in the repo root:
+Create `.env.local` in **`web/`** (next to `package.json`, not at the repo root):
 
 ```ini
 # Browser-exposed — safe, RLS protects the data
@@ -70,6 +71,8 @@ SUPABASE_SERVICE_ROLE_KEY=<service_role key>
 
 `.env*` files are gitignored.
 
+All npm scripts run from `web/`:
+
 | Script | Does |
 | --- | --- |
 | `npm run dev` | Dev server with hot reload |
@@ -81,13 +84,13 @@ SUPABASE_SERVICE_ROLE_KEY=<service_role key>
 ## 3. Flutter app
 
 ```powershell
-cd soyuru_sathkara
+cd mobile
 flutter pub get
 flutter run
 ```
 
 No `--dart-define` needed: the publishable key is bundled in
-[`lib/core/env.dart`](../soyuru_sathkara/lib/core/env.dart), which is how
+[`lib/core/env.dart`](../mobile/lib/core/env.dart), which is how
 publishable keys are meant to be used.
 
 To target a different project (e.g. a Supabase branch):
@@ -110,35 +113,53 @@ content team can edit them without touching Dart. `flutter gen-l10n` regenerates
 ## 4. Deployment
 
 The site targets **https://ss.efsu-uom.lk** — that domain is hard-coded in
-[`app/layout.tsx`](../app/layout.tsx) (`metadataBase`, canonical, OG),
-[`app/sitemap.ts`](../app/sitemap.ts), and `public/robots.txt`. Change all three
+[`web/app/layout.tsx`](../web/app/layout.tsx) (`metadataBase`, canonical, OG),
+[`web/app/sitemap.ts`](../web/app/sitemap.ts), and `web/public/robots.txt`. Change all three
 together if the domain moves.
 
-Vercel is the assumed host. Set the three environment variables above in the
+Vercel is the assumed host. **Set the project's Root Directory to `web`** —
+without that, the build cannot find `package.json` and fails immediately.
+
+Set the three environment variables above in the
 project settings; `SUPABASE_SERVICE_ROLE_KEY` must not carry the `NEXT_PUBLIC_`
 prefix or it ends up in the client bundle.
 
-`next.config.ts` already sets `X-Frame-Options: SAMEORIGIN`,
+`web/next.config.ts` already sets `X-Frame-Options: SAMEORIGIN`,
 `X-Content-Type-Options: nosniff`, a `Referrer-Policy`, immutable one-year
 caching for images, AVIF/WebP conversion, and strips `X-Powered-By`.
 
 ## Repository layout
 
+The two apps are separated; the backend and shared tooling sit at root because
+both apps consume them.
+
 ```
-app/                     Next.js App Router — website + admin panel
-  admin/                 Admin panel (service-role writes)
-  components/            Shared React components
-  contexts/              LanguageContext (en/si/ta, localStorage-backed)
-  data/                  Legacy hard-coded content — source of the seed
-  i18n/                  en.ts / si.ts / ta.ts translation dictionaries
-  resources/             Public /resources/* pages
-  utils/                 animations.ts (+ the missing supabase/ helpers)
-public/                  Static assets, PDFs, gallery images, robots.txt
+web/                     Next.js — public website + admin panel
+  app/                   App Router
+    admin/               Admin panel (service-role writes)
+    components/          Shared React components
+    contexts/            LanguageContext (en/si/ta, localStorage-backed)
+    data/                Legacy hard-coded content — source of the seed
+    i18n/                en.ts / si.ts / ta.ts translation dictionaries
+    resources/           Public /resources/* pages
+    utils/               animations.ts (+ the missing supabase/ helpers)
+  public/                Static assets, PDFs, gallery images, robots.txt
+  middleware.ts          Supabase session refresh
+  package.json           All npm scripts live here — run them from web/
+  next.config.ts  tsconfig.json  postcss.config.mjs  eslint.config.mjs
+
+mobile/                  Flutter app (Dart package name: soyuru_sathkara)
+  lib/                   core/ models/ repositories/ services/ features/
+  l10n/                  app_{en,si,ta}.arb — edit these, not lib/l10n/
+  test/
+
+supabase/                Shared backend — migrations, seed, RUN_ALL, README
 scripts/upload_pdfs.mjs  One-off PDF uploader (service_role, zero deps)
-soyuru_sathkara/         Flutter mobile app
-supabase/                Migrations, seed, RUN_ALL bundle, backend README
 docs/                    This documentation
 ```
 
-Note `.gitignore` currently excludes `soyuru_sathkara/`, `supabase/` and
-`scripts/` — see [known-issues.md](known-issues.md).
+Two consequences of the split worth remembering:
+
+- **npm commands run from `web/`**, not the repo root.
+- **`node scripts/upload_pdfs.mjs` runs from the repo root** — it resolves PDFs
+  at `web/public/files/**` relative to the repo, not to `web/`.

@@ -3,8 +3,8 @@
 Lives at `/admin`, inside the same Next.js app. It is the only way content
 reaches the database outside of the SQL seed.
 
-> ⚠ **The panel is currently unprotected.** `app/admin/layout.tsx` renders its
-> children with no session check, and `middleware.ts` refreshes the auth cookie
+> ⚠ **The panel is currently unprotected.** `web/app/admin/layout.tsx` renders its
+> children with no session check, and `web/middleware.ts` refreshes the auth cookie
 > without redirecting unauthenticated users away from `/admin`. Anyone who knows
 > the URL can upload and delete content. See [known-issues.md](known-issues.md)
 > for the fix.
@@ -13,12 +13,12 @@ reaches the database outside of the SQL seed.
 
 | Route | File | Rendering |
 | --- | --- | --- |
-| `/admin` | [app/admin/page.tsx](../app/admin/page.tsx) | Static dashboard with two links |
-| `/admin/papers` | [app/admin/papers/page.tsx](../app/admin/papers/page.tsx) | Server — upload form + list of all papers |
-| `/admin/videos` | [app/admin/videos/page.tsx](../app/admin/videos/page.tsx) | Server — add form + 50 most recent videos |
-| `/admin/login` | [app/admin/login/page.tsx](../app/admin/login/page.tsx) | Email + password sign-in |
+| `/admin` | [app/admin/page.tsx](../web/app/admin/page.tsx) | Static dashboard with two links |
+| `/admin/papers` | [app/admin/papers/page.tsx](../web/app/admin/papers/page.tsx) | Server — upload form + list of all papers |
+| `/admin/videos` | [app/admin/videos/page.tsx](../web/app/admin/videos/page.tsx) | Server — add form + 50 most recent videos |
+| `/admin/login` | [app/admin/login/page.tsx](../web/app/admin/login/page.tsx) | Email + password sign-in |
 
-[`app/admin/layout.tsx`](../app/admin/layout.tsx) provides the sidebar shell
+[`web/app/admin/layout.tsx`](../web/app/admin/layout.tsx) provides the sidebar shell
 (Dashboard / Papers & PDFs / YouTube Videos / Back to Site). Note it sits *inside*
 the root layout, so the public `Navbar` and `Footer` also render on admin pages.
 
@@ -28,9 +28,9 @@ Three different clients, used deliberately:
 
 | Helper | Used by | Key |
 | --- | --- | --- |
-| `createClient()` from `app/utils/supabase/client` | Public `/resources/*` pages (browser) | anon |
-| `createClient()` from `app/utils/supabase/server` | `login` server action | anon, cookie-bound |
-| `createAdminClient()` from `app/utils/supabase/admin` | Admin pages and content server actions | **service_role** |
+| `createClient()` from `web/app/utils/supabase/client` | Public `/resources/*` pages (browser) | anon |
+| `createClient()` from `web/app/utils/supabase/server` | `login` server action | anon, cookie-bound |
+| `createAdminClient()` from `web/app/utils/supabase/admin` | Admin pages and content server actions | **service_role** |
 
 `createAdminClient()` bypasses RLS. It must only ever be called from server
 components and server actions — never imported into a `"use client"` file, or
@@ -38,7 +38,7 @@ the key ends up in the browser bundle.
 
 ## Server actions
 
-All in [`app/admin/actions.ts`](../app/admin/actions.ts) (`'use server'`).
+All in [`web/app/admin/actions.ts`](../web/app/admin/actions.ts) (`'use server'`).
 
 ### `uploadPaper(formData)`
 
@@ -71,13 +71,13 @@ paper's card, on both the website and the app.
 ### `deleteVideo(formData)`
 
 Takes `id`, deletes from `videos`, revalidates. Invoked from
-[`DeleteVideoButton`](../app/admin/videos/DeleteVideoButton.tsx), a small client
+[`DeleteVideoButton`](../web/app/admin/videos/DeleteVideoButton.tsx), a small client
 component that wraps the action in a form with a confirmation.
 
 There is no delete action for papers, and no edit action for either — the panel
 is create/read/delete-videos only.
 
-### `login(formData)` — [app/admin/login/actions.ts](../app/admin/login/actions.ts)
+### `login(formData)` — [app/admin/login/actions.ts](../web/app/admin/login/actions.ts)
 
 Calls `supabase.auth.signInWithPassword`, redirects to `/admin/login?error=true`
 on failure (the page does not yet render that error), then `revalidatePath('/', 'layout')`
